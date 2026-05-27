@@ -25,6 +25,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--dark);background:var(--bg);lin
 /* ── NAV ─────────────────────────────────────────────────────────────── */
 nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.04)}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:18px;font-style:italic;color:var(--dark)}
+.nav-right{display:flex;align-items:center;gap:24px}
 .nav-links{display:flex;gap:24px;list-style:none}
 .nav-links a{font-size:13px;color:var(--mid);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--dark)}
@@ -67,7 +68,7 @@ section{padding:64px 32px;max-width:860px;margin:0 auto}
 .section-bg{background:#f0f0f8;max-width:100%;padding:64px 32px}
 .section-inner{max-width:860px;margin:0 auto}
 .section-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:28px}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .service-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s,box-shadow .2s;cursor:pointer}
 .service-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(26,86,219,.1)}
 .service-icon{width:40px;height:40px;background:var(--blue-light);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;color:var(--blue);font-weight:600}
@@ -75,16 +76,26 @@ section{padding:64px 32px;max-width:860px;margin:0 auto}
 .service-desc{font-size:13px;color:var(--mid);line-height:1.65;margin-bottom:12px}
 .service-tags{display:flex;flex-wrap:wrap;gap:5px}
 .stag{font-size:11px;padding:3px 8px;border-radius:10px;background:var(--blue-light);color:var(--blue)}
-.service-toggle{display:inline-flex;align-items:center;gap:5px;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:none;border:none;padding:0;cursor:pointer;font-family:'DM Sans',sans-serif}
-.service-toggle:hover{opacity:.75}
-.service-toggle .arrow{transition:transform .25s;display:inline-block}
-.service-toggle.open .arrow{transform:rotate(180deg)}
-.service-projects{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
-.service-projects.open{display:block}
-.proj{padding:10px 0;border-bottom:1px solid var(--border)}
-.proj:last-child{border-bottom:none;padding-bottom:0}
-.proj-name{font-size:12px;font-weight:600;color:var(--dark);margin-bottom:3px}
-.proj-desc{font-size:12px;color:var(--mid);line-height:1.65}
+/* ── CREDENTIALS BAND ────────────────────────────────────────────────── */
+.credentials-band{background:var(--dark);padding:14px 32px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.cred-item{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.cred-sep{color:rgba(255,255,255,.2);font-size:18px;font-weight:300}
+
+/* ── SERVICE PANEL ───────────────────────────────────────────────────── */
+.service-panel{display:none;background:var(--dark);color:#fff;padding:40px 32px;margin-top:24px;border-radius:var(--radius)}
+.service-panel.open{display:block}
+.panel-title{font-family:'DM Serif Display',serif;font-size:22px;font-style:italic;color:#fff;margin-bottom:24px}
+.panel-projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:32px}
+.panel-proj{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:18px}
+.panel-proj-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:6px}
+.panel-proj-desc{font-size:12px;color:rgba(255,255,255,.6);line-height:1.65}
+.panel-proj-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;background:#ffd96a22;color:#ffd96a;margin-top:6px;font-weight:500;border:1px solid #ffd96a44}
+.panel-proj ul{margin:6px 0 0 14px;padding:0;list-style:disc;display:flex;flex-direction:column;gap:4px;color:rgba(255,255,255,.6);font-size:12px;line-height:1.65}
+.panel-cta-row{display:flex;justify-content:flex-end}
+.panel-cta{background:#fff;color:var(--dark);border:none;border-radius:var(--radius);padding:12px 28px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:opacity .2s}
+.panel-cta:hover{opacity:.88}
+
+/* ── LEGACY PROJ (keep for safety) ──────────────────────────────────── */
 .proj-badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:8px;background:#fff3cd;color:#92610a;margin-top:4px;font-weight:500}
 
 
@@ -118,7 +129,7 @@ footer a{color:var(--blue);text-decoration:none}
 }
 @media(max-width:640px){
   nav{padding:14px 20px}
-  .nav-links,.nav-cta{display:none}
+  .nav-right{display:none}
   .nav-hamburger{display:flex}
   .hero{padding:48px 20px 40px}
   .hero-inner{flex-direction:column-reverse;align-items:flex-start;gap:24px}
@@ -126,6 +137,8 @@ footer a{color:var(--blue);text-decoration:none}
   section{padding:48px 20px}
   .section-bg{padding:48px 20px}
   .contact-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .panel-projects{grid-template-columns:1fr}
 
 }
 </style>
@@ -134,11 +147,13 @@ footer a{color:var(--blue);text-decoration:none}
 
 <nav>
   <span class="nav-logo">Maria Armada</span>
-  <ul class="nav-links">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#contact">Contacto</a></li>
-  </ul>
-  <button class="nav-cta" onclick="window.open('https://calendly.com/mariaarmadach/30min','_blank')">Agenda una llamada</button>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+    <button class="nav-cta" onclick="window.open('https://calendly.com/mariaarmadach/30min','_blank')">Agenda una llamada</button>
+  </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Abrir menú" onclick="toggleMobileNav()">
     <span></span><span></span><span></span>
   </button>
@@ -160,8 +175,7 @@ footer a{color:var(--blue);text-decoration:none}
       <h1>Hagamos que tu negocio<br>funcione y <em>escale</em> —<br>sin complicaciones.</h1>
       <p class="hero-sub">Estrategia, operaciones y soluciones digitales para startups y empresas en crecimiento. Del diagnóstico al resultado.</p>
       <div class="hero-btns">
-        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Descubre qué solución tenemos para ti</button>
-        <button class="btn-secondary" onclick="window.open('https://calendly.com/mariaarmadach/30min','_blank')">Agenda una llamada</button>
+        <button class="btn-primary" onclick="window.open('https://calendly.com/mariaarmadach/30min','_blank')">Agenda una llamada de introducción</button>
         <button class="btn-secondary" onclick="document.getElementById('mail').scrollIntoView({behavior:'smooth'})">Escríbeme</button>
       </div>
     </div>
@@ -179,111 +193,64 @@ footer a{color:var(--blue);text-decoration:none}
   </div>
 </div>
 
+<div class="credentials-band">
+  <span class="cred-item">EY</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">BCG</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">IE Business School</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">Entrepreneurship</span>
+</div>
+
 <div class="section-bg" id="servicios">
 <div class="section-inner">
   <div class="section-label">Servicios</div>
   <div class="services-grid">
 
     <!-- 01 Estrategia & Operaciones -->
-    <div class="service-card" onclick="document.getElementById('mail').scrollIntoView({behavior:'smooth'})">
+    <div class="service-card" onclick="showServicePanel(0)">
       <div class="service-icon">01</div>
       <div class="service-title">Estrategia & Operaciones</div>
       <div class="service-desc">Value engineering, estrategia comercial, procesos internos y estructuración de equipos. Del diagnóstico al resultado medible.</div>
       <div class="service-tags"><span class="stag">Value Engineering</span><span class="stag">GTM</span><span class="stag">Operaciones</span><span class="stag">Procesos</span></div>
-      <button class="service-toggle" onclick="event.stopPropagation();toggleProjects(this)">Ver proyectos <span class="arrow">↓</span></button>
-      <div class="service-projects">
-        <div class="proj">
-          <div class="proj-name">Grupo Tendam — Sustainability Implant</div>
-          <div class="proj-desc">Gestión de la estrategia ESG con el director corporativo. Análisis de certificaciones Bcorp, rendimientos, gestión de inversores y soporte en herramientas SaaS internas.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">Refill — Plan de Negocio & GTM</div>
-          <div class="proj-desc">Desarrollo del plan de negocio y estrategia GTM completa para modelo de distribución sin envases en retail tradicional. Puesta en marcha de logística e inversa, estrategia de monetización y acuerdos con retailers.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">La Granja de Gansos — Mentoría de Incubadora</div>
-          <div class="proj-desc">Mentoría en estrategia de marca y comercialización para proyectos emergentes seleccionados en la incubadora de innovación textil de El Ganso × Factoría Cultural.</div>
-        </div>
-      </div>
     </div>
 
     <!-- 02 Marca & Digital -->
-    <div class="service-card" onclick="document.getElementById('mail').scrollIntoView({behavior:'smooth'})">
+    <div class="service-card" onclick="showServicePanel(1)">
       <div class="service-icon">02</div>
       <div class="service-title">Marca & Digital</div>
       <div class="service-desc">Posicionamiento, identidad de marca, webs, ecommerce y comunicación. Construcción de presencia digital desde cero.</div>
       <div class="service-tags"><span class="stag">Marca</span><span class="stag">Web</span><span class="stag">Ecommerce</span><span class="stag">Comunicación</span></div>
-      <button class="service-toggle" onclick="event.stopPropagation();toggleProjects(this)">Ver proyectos <span class="arrow">↓</span></button>
-      <div class="service-projects">
-        <div class="proj">
-          <div class="proj-name">Supracafé — Marca & Suscripción B2C</div>
-          <div class="proj-desc">Estrategia de comercialización y marca para línea sostenible. Nuevo naming, packaging, modelo de suscripción completo, landing, relación con el origen y diversificación de producto con economía circular.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">RRROad — Estrategia de Marca</div>
-          <div class="proj-desc">Posicionamiento para marca de textil. Sistema de transparencia con esquemas visuales y etiquetado por impacto de producto como valor diferencial.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">Leonarda Esculturas — Web & Ecommerce</div>
-          <div class="proj-desc">Lanzamiento de web con ecommerce operativo: gestión de inventario, facturas, códigos de descuento y todas las funcionalidades. <a href="https://www.leonardaesculturas.com" target="_blank" onclick="event.stopPropagation()" style="color:var(--blue)">leonardaesculturas.com</a></div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">Landing Pages Personales</div>
-          <div class="proj-desc">Webs para particulares y autónomos con gestión de agenda, reservas, formularios de inscripción, agentes de IA y otras funcionalidades.</div>
-        </div>
-      </div>
     </div>
 
     <!-- 03 Transformación con IA -->
-    <div class="service-card" onclick="document.getElementById('mail').scrollIntoView({behavior:'smooth'})">
+    <div class="service-card" onclick="showServicePanel(2)">
       <div class="service-icon">03</div>
       <div class="service-title">Transformación con IA</div>
       <div class="service-desc">Implementación de IA en procesos reales. Automatizaciones, herramientas a medida, sistemas de gestión y formación de equipos.</div>
       <div class="service-tags"><span class="stag">Automatización</span><span class="stag">Agentes</span><span class="stag">Sistemas</span><span class="stag">Formación</span></div>
-      <button class="service-toggle" onclick="event.stopPropagation();toggleProjects(this)">Ver proyectos <span class="arrow">↓</span></button>
-      <div class="service-projects">
-        <div class="proj">
-          <div class="proj-name">Dcycle — Automatización con Agentes de IA</div>
-          <div class="proj-desc">
-            <ul style="margin:6px 0 0 14px;padding:0;list-style:disc;display:flex;flex-direction:column;gap:4px">
-              <li>Automatización de entregables comerciales a clientes</li>
-              <li>Automatización de maquetación de presentaciones</li>
-              <li>Automatización con IA de análisis de rendimiento y rendimientos internos</li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- 04 Nuevos Modelos de Negocio e Innovación -->
-    <div class="service-card" onclick="document.getElementById('mail').scrollIntoView({behavior:'smooth'})">
+    <div class="service-card" onclick="showServicePanel(3)">
       <div class="service-icon">04</div>
       <div class="service-title">Nuevos Modelos de Negocio e Innovación</div>
       <div class="service-desc">Diseño y validación de nuevas líneas de negocio, modelos de monetización y estrategias de innovación para empresas que quieren crecer de otra manera.</div>
       <div class="service-tags"><span class="stag">Innovación</span><span class="stag">Modelo de negocio</span><span class="stag">Validación</span><span class="stag">Crecimiento</span></div>
-      <button class="service-toggle" onclick="event.stopPropagation();toggleProjects(this)">Ver proyectos <span class="arrow">↓</span></button>
-      <div class="service-projects">
-        <div class="proj">
-          <div class="proj-name">El Ganso × Factoría Cultural — Incubadora de Innovación</div>
-          <div class="proj-desc">PMO y lanzamiento de incubadora de innovación en el sector textil entre El Ganso y Factoría Cultural (Matadero). Activación de soluciones de sostenibilidad y apoyo al emprendimiento emergente.</div>
-          <span class="proj-badge">⭐ Top 100 mejores ideas del año — Expansión 2019</span>
-        </div>
-        <div class="proj">
-          <div class="proj-name">Mahou — Open Innovation</div>
-          <div class="proj-desc">Identificación de startups sectoriales con soluciones relevantes para el negocio. Generación de sinergias, modelos de inversión y estructuras de joint venture con beneficios retroactivos.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">BCG — Nuevos Modelos de Negocio Circular</div>
-          <div class="proj-desc">Desarrollo de soluciones que convierten costes en fuentes de ingreso mediante modelos de circularidad. Inversiones de distintos tamaños con retorno medible.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">Dcycle — Value Proposition & Posicionamiento</div>
-          <div class="proj-desc">Análisis de propuesta de valor, alineamiento interno y diferenciación de mercado. Benchmark competitivo y justificación de precio para la toma de decisión del comprador.</div>
-        </div>
-      </div>
     </div>
 
   </div>
+
+  <!-- Panel de proyectos -->
+  <div id="servicePanel" class="service-panel">
+    <div class="panel-title" id="panelTitle"></div>
+    <div class="panel-projects" id="panelProjects"></div>
+    <div class="panel-cta-row">
+      <button class="panel-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Cuéntame qué necesitas →</button>
+    </div>
+  </div>
+
 </div>
 </div>
 
@@ -305,16 +272,6 @@ footer a{color:var(--blue);text-decoration:none}
         <div class="form-row"><label>Nombre *</label><input type="text" id="rNombre" name="nombre" required placeholder="Tu nombre"/></div>
         <div class="form-row"><label>Empresa</label><input type="text" id="rEmpresa" name="empresa" placeholder="Tu empresa o proyecto"/></div>
         <div class="form-row"><label>Qué necesitas *</label><textarea id="rNecesidad" name="necesidad" required placeholder="Cuéntame el reto o problema que quieres resolver..."></textarea></div>
-        <div class="form-row"><label>Presupuesto aproximado</label>
-          <select id="rPresupuesto" name="presupuesto">
-            <option value="">Selecciona un rango</option>
-            <option>Menos de 1.000€</option>
-            <option>1.000€ - 5.000€</option>
-            <option>5.000€ - 15.000€</option>
-            <option>Más de 15.000€</option>
-            <option>Por definir</option>
-          </select>
-        </div>
         <div class="form-row"><label>Email *</label><input type="email" id="rEmail" name="email" required placeholder="tu@email.com"/></div>
         <input type="hidden" name="_subject" value="Nueva solicitud desde portfolio"/>
         <button type="submit" class="form-submit" id="submitBtn">Enviar solicitud</button>
@@ -356,7 +313,6 @@ async function submitReq(e) {
     nombre: document.getElementById('rNombre').value,
     empresa: document.getElementById('rEmpresa').value,
     necesidad: document.getElementById('rNecesidad').value,
-    presupuesto: document.getElementById('rPresupuesto').value,
     email: document.getElementById('rEmail').value,
     _subject: 'Nueva solicitud desde portfolio'
   };
@@ -381,12 +337,92 @@ async function submitReq(e) {
   }
 }
 
-// ── PROYECTOS DESPLEGABLES ────────────────────────────────────────────
-function toggleProjects(btn) {
-  const projects = btn.nextElementSibling;
-  projects.classList.toggle('open');
-  btn.classList.toggle('open');
-  btn.childNodes[0].textContent = projects.classList.contains('open') ? 'Ocultar proyectos ' : 'Ver proyectos ';
+// ── DATOS DE SERVICIOS ────────────────────────────────────────────────
+const serviceData = [
+  {
+    title: 'Estrategia & Operaciones',
+    projects: [
+      { name: 'Supracafé — Estrategia Comercial', desc: 'Fase 1: estrategia para poner en valor la línea responsable, distribución, diversificación y fidelización con suscripción.' },
+      { name: 'Grupo Tendam — Sustainability Implant', desc: 'Gestión de la estrategia ESG con el director corporativo. Análisis de certificaciones Bcorp, rendimientos, gestión de inversores y soporte en herramientas SaaS internas.' },
+      { name: 'Refill — Plan de Negocio & GTM', desc: 'Desarrollo del plan de negocio y estrategia GTM completa para modelo de distribución sin envases en retail. Puesta en marcha de logística e inversa, estrategia de monetización y acuerdos con retailers.' },
+      { name: 'La Granja de Gansos — Mentoría', desc: 'Mentoría en estrategia de marca y comercialización para proyectos emergentes en la incubadora textil de El Ganso × Factoría Cultural.' }
+    ]
+  },
+  {
+    title: 'Marca & Digital',
+    projects: [
+      { name: 'Supracafé — Marca & Suscripción B2C', desc: 'Fase 2: naming, packaging, modelo de suscripción completo, landing, relación con el origen.' },
+      { name: 'RRROad — Posicionamiento & Identidad', desc: 'Posicionamiento, identidad y concepto de marca para textil. Sistema de transparencia visual e impacto de producto como valor diferencial.' },
+      { name: 'Leonarda Esculturas — Web & Ecommerce', desc: 'Web con ecommerce operativo: inventario, facturas, códigos de descuento. leonardaesculturas.com', link: 'https://www.leonardaesculturas.com' },
+      { name: 'Landing Pages Personales', desc: 'Webs para particulares y autónomos con agenda, reservas, formularios, agentes de IA.' },
+      { name: 'Alive — App Health con IA', desc: 'App que monitoriza síntomas y rendimiento hacia un objetivo.' }
+    ]
+  },
+  {
+    title: 'Transformación con IA',
+    projects: [
+      {
+        name: 'Dcycle — Automatización con Agentes de IA',
+        desc: '',
+        bullets: [
+          'Automatización de entregables comerciales a clientes',
+          'Automatización de maquetación de presentaciones',
+          'Automatización con IA de análisis de rendimiento y rendimientos internos'
+        ]
+      }
+    ]
+  },
+  {
+    title: 'Nuevos Modelos de Negocio e Innovación',
+    projects: [
+      { name: 'El Ganso × Factoría Cultural — Incubadora', desc: 'PMO y lanzamiento de incubadora de innovación textil. Intraemprendimiento corporativo.', badge: '⭐ Top 100 mejores ideas — Expansión 2019' },
+      { name: 'Mahou — Open Innovation', desc: 'Identificación de startups sectoriales para sinergias, modelos de inversión y joint ventures.' },
+      { name: 'BCG — Nuevos Modelos de Negocio Circular', desc: 'Modelos que convierten costes en fuentes de ingreso mediante circularidad.' },
+      { name: 'Dcycle — Value Proposition & Posicionamiento', desc: 'Análisis de propuesta de valor, benchmark competitivo y posicionamiento de mercado.' }
+    ]
+  }
+];
+
+// ── PANEL DE PROYECTOS ────────────────────────────────────────────────
+let currentPanel = -1;
+
+function showServicePanel(idx) {
+  const panel = document.getElementById('servicePanel');
+  const cards = document.querySelectorAll('.service-card');
+
+  // Mismo card: toggle cerrar
+  if (currentPanel === idx && panel.classList.contains('open')) {
+    panel.classList.remove('open');
+    cards.forEach(c => c.style.borderColor = '');
+    currentPanel = -1;
+    return;
+  }
+
+  currentPanel = idx;
+  const data = serviceData[idx];
+
+  // Highlight card activa
+  cards.forEach((c, i) => {
+    c.style.borderColor = i === idx ? 'var(--blue)' : '';
+    c.style.boxShadow = i === idx ? '0 4px 16px rgba(26,86,219,.18)' : '';
+  });
+
+  // Título
+  document.getElementById('panelTitle').textContent = data.title;
+
+  // Proyectos
+  const container = document.getElementById('panelProjects');
+  container.innerHTML = data.projects.map(p => {
+    const bulletHTML = p.bullets
+      ? `<ul>${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`
+      : `<div class="panel-proj-desc">${p.link ? p.desc.replace('leonardaesculturas.com', `<a href="${p.link}" target="_blank" style="color:#93c5fd">leonardaesculturas.com</a>`) : p.desc}</div>`;
+    const badgeHTML = p.badge ? `<div class="panel-proj-badge">${p.badge}</div>` : '';
+    return `<div class="panel-proj"><div class="panel-proj-name">${p.name}</div>${bulletHTML}${badgeHTML}</div>`;
+  }).join('');
+
+  // Mostrar panel y hacer scroll suave
+  panel.classList.add('open');
+  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 }
 
 // ── NAV MÓVIL ─────────────────────────────────────────────────────────
