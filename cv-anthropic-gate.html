@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maria Armada Churruca — Applied AI · Anthropic</title>
+<title>Maria Armada Churruca — Online CV</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -27,8 +27,8 @@ body{
   width:100%;
   box-shadow:0 8px 40px rgba(20,60,120,0.12);
 }
-.name{font-size:20px;font-weight:600;color:#1a1a1a;margin-bottom:4px}
-.role{font-size:13px;color:#185FA5;margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid rgba(24,95,165,0.2)}
+.welcome{font-size:22px;font-weight:600;color:#1a1a1a;margin-bottom:.5rem}
+.desc{font-size:13px;color:#555;line-height:1.7;margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid rgba(24,95,165,0.15)}
 .label{font-size:11px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;display:block}
 .input{
   width:100%;
@@ -45,6 +45,14 @@ body{
 }
 .input:focus{border-color:#185FA5;background:rgba(255,255,255,0.85)}
 .input::placeholder{color:#aaa}
+.input.invalid{border-color:#c0392b}
+.error{font-size:11px;color:#c0392b;margin-top:-10px;margin-bottom:10px;display:none}
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.25rem}
+.checkbox-row input[type=checkbox]{margin-top:3px;accent-color:#185FA5;flex-shrink:0;width:15px;height:15px;cursor:pointer}
+.checkbox-label{font-size:12px;color:#555;line-height:1.6}
+.checkbox-label a{color:#185FA5;text-decoration:none}
+.checkbox-label a:hover{text-decoration:underline}
+.checkbox-row.invalid-check .checkbox-label{color:#c0392b}
 .submit{
   width:100%;
   padding:11px;
@@ -57,20 +65,17 @@ body{
   font-family:inherit;
   cursor:pointer;
   transition:background .15s;
-  margin-top:.25rem;
 }
 .submit:hover{background:#0C447C}
 .footer{margin-top:1.5rem;font-size:11px;color:#999;text-align:center}
-.error{font-size:11px;color:#c0392b;margin-top:-10px;margin-bottom:10px;display:none}
-.input.invalid{border-color:#c0392b}
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="name">Maria Armada Churruca</div>
-  <div class="role">Applied AI · Anthropic</div>
+  <div class="welcome">Welcome to my online CV</div>
+  <div class="desc">Please enter your name and email to access it. Your details are used only to monitor who views this CV and will be deleted after 30 days.</div>
 
-  <form action="https://formspree.io/f/xbdewkqy" method="POST">
+  <form action="https://formspree.io/f/xbdewkqy" method="POST" id="gate-form">
     <input type="hidden" name="_next" value="https://mariaarmadach.github.io/cv-anthropic.html">
     <input type="hidden" name="_subject" value="CV access — Anthropic Applied AI">
 
@@ -82,39 +87,56 @@ body{
     <input class="input" type="email" id="email" name="email" placeholder="jane@anthropic.com">
     <div class="error" id="email-error">Please enter a valid email.</div>
 
-    <button class="submit" type="button" onclick="submit()">View CV →</button>
+    <div class="checkbox-row" id="privacy-row">
+      <input type="checkbox" id="privacy" name="privacy_accepted" value="yes">
+      <label class="checkbox-label" for="privacy">
+        I accept the <a href="privacy-policy.html" target="_blank">data protection policy</a>. My data will only be used for access monitoring and deleted after 30 days.
+      </label>
+    </div>
+    <div class="error" id="privacy-error">Please accept the data protection policy.</div>
+
+    <button class="submit" type="button" onclick="submitForm()">Access CV →</button>
   </form>
 
-  <div class="footer">Your details are only used to know who's viewing this CV.</div>
+  <div class="footer">No commercial use · Data deleted after 30 days</div>
 </div>
 <script>
-function submit(){
+function submitForm(){
   const nameEl=document.getElementById('name');
   const emailEl=document.getElementById('email');
-  const nameErr=document.getElementById('name-error');
-  const emailErr=document.getElementById('email-error');
+  const privacyEl=document.getElementById('privacy');
+  const privacyRow=document.getElementById('privacy-row');
   let valid=true;
 
   if(!nameEl.value.trim()){
     nameEl.classList.add('invalid');
-    nameErr.style.display='block';
+    document.getElementById('name-error').style.display='block';
     valid=false;
   } else {
     nameEl.classList.remove('invalid');
-    nameErr.style.display='none';
+    document.getElementById('name-error').style.display='none';
   }
 
   const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value);
   if(!emailOk){
     emailEl.classList.add('invalid');
-    emailErr.style.display='block';
+    document.getElementById('email-error').style.display='block';
     valid=false;
   } else {
     emailEl.classList.remove('invalid');
-    emailErr.style.display='none';
+    document.getElementById('email-error').style.display='none';
   }
 
-  if(valid) nameEl.closest('form').submit();
+  if(!privacyEl.checked){
+    privacyRow.classList.add('invalid-check');
+    document.getElementById('privacy-error').style.display='block';
+    valid=false;
+  } else {
+    privacyRow.classList.remove('invalid-check');
+    document.getElementById('privacy-error').style.display='none';
+  }
+
+  if(valid) document.getElementById('gate-form').submit();
 }
 </script>
 </body>
