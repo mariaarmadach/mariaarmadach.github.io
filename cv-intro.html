@@ -33,28 +33,25 @@ body.show-cv{overflow:auto}
 .path-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 
 /* labels */
-.label{position:absolute;max-width:210px}
+.label{
+  position:absolute;max-width:210px;
+  background:rgba(255,255,255,0.45);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  padding:10px 12px;
+}
 .label-title{font-size:12px;font-weight:700;color:rgba(30,55,100,0.9);margin-bottom:4px;line-height:1.3}
 .label-company{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(30,55,100,0.4);margin-bottom:5px}
 .label-body{font-size:10.5px;color:rgba(30,55,100,0.6);line-height:1.6}
 
-/* label positions — matching sketch */
-#l-ey    {top:8%; right:4%; text-align:right}
-#l-bcg   {top:42%; right:3%; text-align:right}
-#l-refill{top:18%; left:36%}
-#l-dcycle{top:52%; left:22%}
-#l-next  {bottom:14%; left:4%; max-width:260px}
+/* label positions */
+#l-ey    {top:14%; left:3%}
+#l-bcg   {top:14%; right:3%; text-align:right}
+#l-refill{top:44%; left:3%}
+#l-dcycle{top:52%; left:36%}
+#l-next  {bottom:10%; left:50%; transform:translateX(-50%); text-align:center; max-width:280px}
 
 #l-next .label-title{font-size:13px;font-style:italic;color:rgba(30,55,100,0.95)}
 #l-next .label-body{font-size:11px;font-style:italic;color:rgba(30,55,100,0.65)}
-
-/* center hint */
-.center-hint{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  text-align:center;max-width:150px;pointer-events:none;
-}
-.center-hint p{font-size:10px;line-height:1.65;color:rgba(30,55,100,0.35);font-style:italic}
 
 /* bottom cta */
 .bottom-cta{
@@ -182,10 +179,6 @@ body.show-cv{overflow:auto}
     <div class="label-body">I want to take this to the next level — working at the frontier of AI and enterprise, where the disruption is being built, not just deployed. <strong style="color:rgba(30,55,100,0.95)">Is it Anthropic?</strong></div>
   </div>
 
-  <div class="center-hint">
-    <p>A quick review of the job requirements and where my experience maps directly</p>
-  </div>
-
   <!-- Bottom left: contact buttons -->
   <div class="bottom-cta bottom-left">
     <div class="btns-wrap">
@@ -296,10 +289,10 @@ function drawPath(){
   }
 
   const pts = [
-    anchor('l-ey',    'left'),
-    anchor('l-refill','right'),
+    anchor('l-ey',    'right'),
     anchor('l-bcg',   'left'),
-    anchor('l-dcycle','right'),
+    anchor('l-refill','right'),
+    anchor('l-dcycle','left'),
     anchor('l-next',  'top'),
   ];
 
