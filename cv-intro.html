@@ -45,12 +45,10 @@ svg.lines{
   width:100%;
   height:100%;
   pointer-events:none;
-  overflow:visible;
 }
-
 .label{
   position:absolute;
-  max-width:280px;
+  max-width:240px;
 }
 .label-title{
   font-size:12px;
@@ -60,22 +58,35 @@ svg.lines{
   letter-spacing:.01em;
 }
 .label-body{
-  font-size:11.5px;
-  color:rgba(30,55,100,0.65);
+  font-size:11px;
+  color:rgba(30,55,100,0.6);
   line-height:1.6;
 }
-
-/* positions — arranged around a central anchor */
-/* anchor: roughly 50% 55% of the diagram area */
-.l1{top:2%;left:4%}
-.l2{top:2%;right:4%;text-align:right}
-.l3{top:40%;left:1%}
-.l4{top:40%;right:2%;text-align:right}
-.l5{bottom:8%;left:35%;text-align:center;max-width:340px}
-
-/* final "Is it Anthropic?" */
-.l5 .label-title{font-size:14px;font-style:italic;color:rgba(30,55,100,0.95)}
-.l5 .label-body{font-size:12px;font-style:italic;color:rgba(30,55,100,0.7)}
+/* LEFT labels — text flush right edge toward spine */
+.l1{top:4%;left:2%}
+.l3{top:44%;left:2%}
+/* RIGHT labels — text flush left toward spine */
+.l2{top:4%;right:2%;text-align:right}
+.l4{top:44%;right:2%;text-align:right}
+/* BOTTOM center */
+.l5{bottom:4%;left:50%;transform:translateX(-50%);text-align:center;max-width:320px}
+.l5 .label-title{font-size:13px;font-style:italic;color:rgba(30,55,100,0.95)}
+.l5 .label-body{font-size:12px;font-style:italic;color:rgba(30,55,100,0.65)}
+/* CENTER text */
+.center-text{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  max-width:160px;
+  pointer-events:none;
+}
+.center-text p{
+  font-size:10.5px;
+  line-height:1.65;
+  color:rgba(30,55,100,0.4);
+  font-style:italic;
+}
 
 /* ── BOTTOM BAR ── */
 .bottom{
@@ -194,21 +205,10 @@ body.show-cv{overflow:auto}
   </div>
 
   <div class="diagram" id="diagram">
-    <!-- SVG connector lines, drawn by JS after layout -->
     <svg class="lines" id="svg-lines"></svg>
 
-    <!-- Central text -->
-    <div id="center-text" style="
-      position:absolute;
-      top:50%;left:50%;
-      transform:translate(-50%,-48%);
-      text-align:center;
-      max-width:200px;
-      pointer-events:none;
-    ">
-      <div style="font-size:11px;line-height:1.65;color:rgba(30,55,100,0.5);font-style:italic;">
-        A quick review of the job requirements and where my experience maps directly — for your revision
-      </div>
+    <div class="center-text">
+      <p>A quick review of the job requirements and where my experience maps directly</p>
     </div>
 
     <div class="label l1" id="l1">
@@ -339,37 +339,73 @@ body.show-cv{overflow:auto}
 </section>
 
 <script>
-/* ── draw connector lines from each label's anchor point to a central dot ── */
+/* ── botanical annotation lines: horizontal from label → curve to vertical spine ── */
 function drawLines(){
   const diagram = document.getElementById('diagram');
   const svg = document.getElementById('svg-lines');
-  const dRect = diagram.getBoundingClientRect();
+  const W = diagram.offsetWidth;
+  const H = diagram.offsetHeight;
 
-  /* central anchor point (middle of diagram) */
-  const cx = dRect.width * 0.5;
-  const cy = dRect.height * 0.48;
+  /* spine: vertical line at x=50% */
+  const spineX = W * 0.5;
+  const spineTop = H * 0.06;
+  const spineBot = H * 0.80;
 
-  /* draw central dot */
-  svg.innerHTML = `<circle cx="${cx}" cy="${cy}" r="4" fill="rgba(30,55,100,0.5)"/>`;
+  /* spine y positions for each label (where the curve meets the spine) */
+  const spineY = { l1: H*0.22, l2: H*0.32, l3: H*0.52, l4: H*0.62 };
 
-  const labels = ['l1','l2','l3','l4','l5'];
-  labels.forEach(id => {
-    const el = document.getElementById(id);
-    if(!el) return;
-    const eRect = el.getBoundingClientRect();
-    const ex = eRect.left - dRect.left + eRect.width/2;
-    const ey = eRect.top  - dRect.top  + eRect.height/2;
+  let out = '';
 
-    /* cubic bezier: handle points pulled toward center */
-    const mx = (ex + cx) / 2;
-    const my = (ey + cy) / 2;
-    const path = `M ${ex} ${ey} Q ${mx} ${ey} ${cx} ${cy}`;
+  /* spine line */
+  out += `<line x1="${spineX}" y1="${spineTop}" x2="${spineX}" y2="${spineBot}"
+    stroke="rgba(30,55,100,0.18)" stroke-width="1"/>`;
 
-    svg.innerHTML += `
-      <path d="${path}" fill="none" stroke="rgba(30,55,100,0.2)" stroke-width="1"/>
-      <circle cx="${ex}" cy="${ey}" r="3" fill="none" stroke="rgba(30,55,100,0.4)" stroke-width="1"/>
-    `;
+  /* spine dots */
+  Object.values(spineY).forEach(sy => {
+    out += `<circle cx="${spineX}" cy="${sy}" r="2.5"
+      fill="rgba(30,55,100,0.35)"/>`;
   });
+
+  /* bottom spine dot */
+  out += `<circle cx="${spineX}" cy="${spineBot}" r="2.5" fill="rgba(30,55,100,0.5)"/>`;
+
+  /* label connector: cubic bezier that leaves label horizontally, arrives spine vertically */
+  function connector(id, side) {
+    const el = document.getElementById(id);
+    if (!el) return '';
+    const r = el.getBoundingClientRect();
+    const dr = diagram.getBoundingClientRect();
+    /* anchor: right edge for left labels, left edge for right labels */
+    const ax = side === 'left'  ? r.right - dr.left : r.left - dr.left;
+    const ay = r.top - dr.top + r.height * 0.35;
+    const sy = spineY[id];
+    /* control points: first goes horizontal, second arrives from above/below */
+    const cp1x = side === 'left' ? ax + (spineX - ax) * 0.7 : ax - (ax - spineX) * 0.7;
+    const cp1y = ay;
+    const cp2x = spineX;
+    const cp2y = sy + (ay < sy ? -30 : 30);
+    return `<path d="M ${ax} ${ay} C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${spineX} ${sy}"
+      fill="none" stroke="rgba(30,55,100,0.2)" stroke-width="1"/>
+      <circle cx="${ax}" cy="${ay}" r="2" fill="rgba(30,55,100,0.3)"/>`;
+  }
+
+  out += connector('l1','left');
+  out += connector('l2','right');
+  out += connector('l3','left');
+  out += connector('l4','right');
+
+  /* l5 connects straight up from its center to spine bottom */
+  const l5 = document.getElementById('l5');
+  if (l5) {
+    const r = l5.getBoundingClientRect();
+    const dr = diagram.getBoundingClientRect();
+    const lx = r.left - dr.left + r.width/2;
+    const ly = r.top - dr.top;
+    out += `<path d="M ${lx} ${ly} Q ${lx} ${spineBot+10} ${spineX} ${spineBot}"
+      fill="none" stroke="rgba(30,55,100,0.2)" stroke-width="1"/>`;
+  }
+
+  svg.innerHTML = out;
 }
 
 window.addEventListener('load', drawLines);
