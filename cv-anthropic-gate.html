@@ -20,9 +20,9 @@ body{
   max-width:400px;
   width:100%;
 }
-.welcome{font-size:24px;font-weight:600;color:#fff;margin-bottom:.5rem;letter-spacing:-.01em}
-.desc{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:2rem;padding-bottom:1.75rem;border-bottom:1px solid rgba(255,255,255,0.15)}
-.label{font-size:10px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:block}
+.welcome{font-size:24px;font-weight:600;color:rgba(30,55,100,0.9);margin-bottom:.5rem;letter-spacing:-.01em}
+.desc{font-size:13px;color:rgba(30,55,100,0.7);line-height:1.7;margin-bottom:2rem;padding-bottom:1.75rem;border-bottom:1px solid rgba(30,55,100,0.2)}
+.label{font-size:10px;font-weight:600;color:rgba(30,55,100,0.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:block}
 .input{
   width:100%;
   padding:10px 12px;
@@ -30,26 +30,26 @@ body{
   border-radius:0;
   font-size:14px;
   font-family:inherit;
-  color:#fff;
+  color:rgba(30,55,100,0.9);
   outline:none;
   transition:border-color .15s, background .15s;
   margin-bottom:1rem;
   background:rgba(0,0,0,0.08);
 }
 .input:focus{border-color:rgba(255,255,255,0.5);background:rgba(0,0,0,0.15)}
-.input::placeholder{color:rgba(255,255,255,0.3)}
+.input::placeholder{color:rgba(30,55,100,0.3)}
 .input.invalid{border-color:#e74c3c}
 .error{font-size:11px;color:#ff6b6b;margin-top:-10px;margin-bottom:10px;display:none}
 .checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.5rem}
 .checkbox-row input[type=checkbox]{margin-top:3px;flex-shrink:0;width:14px;height:14px;cursor:pointer;accent-color:#fff;border-radius:0}
-.checkbox-label{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6}
-.checkbox-label a{color:rgba(255,255,255,0.9);text-decoration:underline;text-underline-offset:3px}
+.checkbox-label{font-size:12px;color:rgba(30,55,100,0.65);line-height:1.6}
+.checkbox-label a{color:rgba(30,55,100,0.9);text-decoration:underline;text-underline-offset:3px}
 .checkbox-row.invalid-check .checkbox-label{color:#ff6b6b}
 .submit{
   width:100%;
   padding:11px 16px;
   background:transparent;
-  color:#fff;
+  color:rgba(30,55,100,0.85);
   border:1px solid rgba(30,55,100,0.8);
   border-radius:0;
   font-size:13px;
@@ -63,14 +63,14 @@ body{
   align-items:center;
   justify-content:space-between;
 }
-.submit:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.4)}
-.footer{margin-top:1.25rem;font-size:11px;color:rgba(255,255,255,0.3);text-align:left;letter-spacing:.04em}
+.submit:hover{background:rgba(30,55,100,0.08);border-color:rgba(30,55,100,0.5)}
+.footer{margin-top:1.25rem;font-size:11px;color:rgba(30,55,100,0.35);text-align:left;letter-spacing:.04em}
 </style>
 </head>
 <body>
 <div class="form-wrap">
-  <div class="welcome">Welcome to my online CV</div>
-  <div class="desc">Enter your name and email to access it. Your details are used only to monitor who views this CV and will be deleted after 30 days.</div>
+  <div class="welcome">Hey, nice to meet you.</div>
+  <div class="desc">Drop your name and email below — just for monitoring purposes — and we can get going. No spam, no weird stuff, data's gone in 30 days.</div>
 
   <form action="https://formspree.io/f/xbdewkqy" method="POST" id="gate-form">
     <input type="hidden" name="_next" value="https://mariaarmadach.github.io/cv-anthropic.html">
