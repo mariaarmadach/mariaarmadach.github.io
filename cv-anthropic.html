@@ -6,36 +6,77 @@
 <title>Maria Armada Churruca — Applied AI · Anthropic</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fafafa;color:#1a1a1a;min-height:100vh}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:url('background.jpg') center center / cover no-repeat fixed;
+  color:rgba(30,55,100,0.9);
+  min-height:100vh;
+}
 .page{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
-.header{padding:2rem 0 1.5rem;border-bottom:2px solid #185FA5;margin-bottom:2rem}
-.cv-name{font-size:28px;font-weight:600;color:#1a1a1a;margin-bottom:6px}
-.cv-contact{font-size:13px;color:#185FA5}
-.cv-contact a{color:#185FA5;text-decoration:none}
+.header{padding:2rem 0 1.5rem;border-bottom:1px solid rgba(30,55,100,0.2);margin-bottom:2rem}
+.cv-name{font-size:28px;font-weight:600;color:rgba(30,55,100,0.95);margin-bottom:6px}
+.cv-contact{font-size:13px;color:rgba(30,55,100,0.55)}
+.cv-contact a{color:rgba(30,55,100,0.7);text-decoration:none}
+.cv-contact a:hover{color:rgba(30,55,100,0.95)}
 .layout{display:grid;grid-template-columns:240px 1fr;gap:2rem}
 .left-panel{position:sticky;top:2rem;align-self:start}
-.panel-title{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
-.hint{font-size:11px;color:#aaa;margin-bottom:12px;line-height:1.5}
-.req-btn{display:block;width:100%;text-align:left;padding:9px 12px;border-radius:8px;border:1px solid #e5e5e5;background:#fff;color:#555;cursor:pointer;font-size:12px;line-height:1.4;margin-bottom:6px;transition:all .15s;font-family:inherit}
-.req-btn:hover{border-color:#378ADD;color:#0C447C;background:#E6F1FB}
-.req-btn.active{background:#185FA5;color:#fff;border-color:#185FA5;font-weight:600}
-.reset-btn{display:block;width:100%;margin-top:10px;padding:7px 12px;border-radius:8px;border:1px solid #e5e5e5;background:#fff;color:#aaa;cursor:pointer;font-size:11px;font-family:inherit;transition:all .15s}
-.reset-btn:hover{background:#f5f5f5;color:#555}
-.cv-section{font-size:10px;font-weight:600;color:#185FA5;text-transform:uppercase;letter-spacing:.1em;margin:1.5rem 0 .75rem;padding-bottom:4px;border-bottom:1px solid #e5e5e5}
-.cv-about{font-size:13px;color:#444;line-height:1.8;margin-bottom:.75rem;padding:8px;border-radius:8px;border:1px solid transparent;transition:all .2s}
-.role-title{font-size:15px;font-weight:600;color:#1a1a1a;margin-top:1.25rem;margin-bottom:2px}
-.role-company{font-size:12px;color:#888;margin-bottom:.5rem}
-.bullet{display:flex;gap:8px;padding:7px 10px;border-radius:8px;font-size:13px;color:#444;line-height:1.6;margin-bottom:4px;border:1px solid transparent;transition:all .2s}
-.bullet::before{content:'\00B7';color:#ccc;flex-shrink:0;font-size:18px;line-height:1.3}
-.refill-line{font-size:13px;color:#666;line-height:1.6;padding:7px 10px;font-style:italic;border-radius:8px;border:1px solid transparent;transition:all .2s}
-.highlight{background:#E6F1FB !important;border-color:#B5D4F4 !important;color:#0C447C !important}
-.highlight::before{color:#185FA5 !important}
+.panel-title{font-size:10px;font-weight:600;color:rgba(30,55,100,0.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.hint{font-size:11px;color:rgba(30,55,100,0.4);margin-bottom:12px;line-height:1.5}
+.req-btn{
+  display:block;width:100%;text-align:left;
+  padding:9px 12px;
+  border-radius:0;
+  border:1px solid rgba(30,55,100,0.25);
+  background:transparent;
+  color:rgba(30,55,100,0.6);
+  cursor:pointer;font-size:12px;line-height:1.4;margin-bottom:4px;
+  transition:all .15s;font-family:inherit;
+}
+.req-btn:hover{border-color:rgba(30,55,100,0.6);color:rgba(30,55,100,0.9);background:rgba(30,55,100,0.05)}
+.req-btn.active{background:rgba(30,55,100,0.12);color:rgba(30,55,100,0.95);border-color:rgba(30,55,100,0.6);font-weight:600}
+.reset-btn{
+  display:block;width:100%;margin-top:8px;
+  padding:7px 12px;
+  border-radius:0;
+  border:1px solid rgba(30,55,100,0.15);
+  background:transparent;
+  color:rgba(30,55,100,0.35);
+  cursor:pointer;font-size:11px;font-family:inherit;
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  font-family:'SF Mono',ui-monospace,monospace;
+  transition:all .15s;
+}
+.reset-btn:hover{border-color:rgba(30,55,100,0.4);color:rgba(30,55,100,0.7)}
+.cv-section{
+  font-size:10px;font-weight:600;
+  color:rgba(30,55,100,0.5);
+  text-transform:uppercase;letter-spacing:.1em;
+  margin:1.5rem 0 .75rem;
+  padding-bottom:4px;
+  border-bottom:1px solid rgba(30,55,100,0.15);
+}
+.cv-about{font-size:13px;color:rgba(30,55,100,0.75);line-height:1.8;margin-bottom:.75rem;padding:8px;border:1px solid transparent;transition:all .2s}
+.role-title{font-size:15px;font-weight:600;color:rgba(30,55,100,0.95);margin-top:1.25rem;margin-bottom:2px}
+.role-company{font-size:12px;color:rgba(30,55,100,0.45);margin-bottom:.5rem}
+.bullet{display:flex;gap:8px;padding:7px 10px;font-size:13px;color:rgba(30,55,100,0.75);line-height:1.6;margin-bottom:4px;border:1px solid transparent;transition:all .2s}
+.bullet::before{content:'\00B7';color:rgba(30,55,100,0.25);flex-shrink:0;font-size:18px;line-height:1.3}
+.refill-line{font-size:13px;color:rgba(30,55,100,0.6);line-height:1.6;padding:7px 10px;font-style:italic;border:1px solid transparent;transition:all .2s}
+.highlight{background:rgba(30,55,100,0.08) !important;border-color:rgba(30,55,100,0.2) !important;color:rgba(30,55,100,0.95) !important}
+.highlight::before{color:rgba(30,55,100,0.6) !important}
 .dimmed{opacity:.2}
 .skills-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.5rem}
-.skill-tag{font-size:12px;padding:4px 12px;border-radius:20px;background:#f5f5f5;color:#666;border:1px solid #e5e5e5;transition:all .2s}
-.skill-tag.highlight{background:#E6F1FB;color:#0C447C;border-color:#B5D4F4}
+.skill-tag{
+  font-size:12px;padding:4px 12px;
+  border-radius:0;
+  background:transparent;
+  color:rgba(30,55,100,0.55);
+  border:1px solid rgba(30,55,100,0.2);
+  transition:all .2s;
+}
+.skill-tag.highlight{background:rgba(30,55,100,0.08);color:rgba(30,55,100,0.95);border-color:rgba(30,55,100,0.4)}
 .skill-tag.dimmed{opacity:.2}
-.footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e5e5e5;font-size:11px;color:#ccc;text-align:center}
+.edu-line{font-size:13px;color:rgba(30,55,100,0.75);margin-bottom:1.5rem}
+.footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(30,55,100,0.1);font-size:11px;color:rgba(30,55,100,0.3);text-align:center;letter-spacing:.04em}
 @media(max-width:700px){.layout{grid-template-columns:1fr}.left-panel{position:relative;top:0}}
 </style>
 </head>
@@ -99,7 +140,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="bullet" data-tags="eval stakeholder">Mapped Spain's social investment ecosystem and developed impact measurement frameworks for institutional investors.</div>
 
       <div class="cv-section">Education</div>
-      <div style="font-size:13px;color:#444;margin-bottom:1.5rem">Master in Management &nbsp;·&nbsp; IE Business School &nbsp;·&nbsp; 2019–2020</div>
+      <div class="edu-line">Master in Management &nbsp;·&nbsp; IE Business School &nbsp;·&nbsp; 2019–2020</div>
 
       <div class="cv-section">Skills</div>
       <div class="skills-row">
@@ -126,7 +167,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 
-  <div class="footer">Built with Claude Code &nbsp;·&nbsp; Maria Armada Churruca 2025</div>
+  <div class="footer">Built with Claude Code &nbsp;·&nbsp; Maria Armada Churruca 2026</div>
 </div>
 
 <script>
