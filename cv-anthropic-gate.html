@@ -14,66 +14,63 @@ body{
   justify-content:center;
   padding:1.5rem;
   background:url('background.jpg') center center / cover no-repeat fixed;
-  color:#1a1a1a;
+  color:#fff;
 }
-.card{
-  background:rgba(255,255,255,0.55);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,0.7);
-  border-radius:16px;
-  padding:2.5rem 2rem;
-  max-width:420px;
+.form-wrap{
+  max-width:400px;
   width:100%;
-  box-shadow:0 8px 40px rgba(20,60,120,0.12);
 }
-.welcome{font-size:22px;font-weight:600;color:#1a1a1a;margin-bottom:.5rem}
-.desc{font-size:13px;color:#555;line-height:1.7;margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid rgba(24,95,165,0.15)}
-.label{font-size:11px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;display:block}
+.welcome{font-size:24px;font-weight:600;color:#fff;margin-bottom:.5rem;letter-spacing:-.01em}
+.desc{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:2rem;padding-bottom:1.75rem;border-bottom:1px solid rgba(255,255,255,0.15)}
+.label{font-size:10px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:block}
 .input{
   width:100%;
   padding:10px 12px;
-  border:1px solid rgba(255,255,255,0.6);
-  border-radius:8px;
+  border:1px solid rgba(30,55,100,0.7);
+  border-radius:0;
   font-size:14px;
   font-family:inherit;
-  color:#1a1a1a;
+  color:#fff;
   outline:none;
   transition:border-color .15s, background .15s;
   margin-bottom:1rem;
-  background:rgba(255,255,255,0.6);
+  background:rgba(0,0,0,0.08);
 }
-.input:focus{border-color:#185FA5;background:rgba(255,255,255,0.85)}
-.input::placeholder{color:#aaa}
-.input.invalid{border-color:#c0392b}
-.error{font-size:11px;color:#c0392b;margin-top:-10px;margin-bottom:10px;display:none}
-.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.25rem}
-.checkbox-row input[type=checkbox]{margin-top:3px;accent-color:#185FA5;flex-shrink:0;width:15px;height:15px;cursor:pointer}
-.checkbox-label{font-size:12px;color:#555;line-height:1.6}
-.checkbox-label a{color:#185FA5;text-decoration:none}
-.checkbox-label a:hover{text-decoration:underline}
-.checkbox-row.invalid-check .checkbox-label{color:#c0392b}
+.input:focus{border-color:rgba(255,255,255,0.5);background:rgba(0,0,0,0.15)}
+.input::placeholder{color:rgba(255,255,255,0.3)}
+.input.invalid{border-color:#e74c3c}
+.error{font-size:11px;color:#ff6b6b;margin-top:-10px;margin-bottom:10px;display:none}
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.5rem}
+.checkbox-row input[type=checkbox]{margin-top:3px;flex-shrink:0;width:14px;height:14px;cursor:pointer;accent-color:#fff;border-radius:0}
+.checkbox-label{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6}
+.checkbox-label a{color:rgba(255,255,255,0.9);text-decoration:underline;text-underline-offset:3px}
+.checkbox-row.invalid-check .checkbox-label{color:#ff6b6b}
 .submit{
   width:100%;
-  padding:11px;
-  background:#185FA5;
+  padding:11px 16px;
+  background:transparent;
   color:#fff;
-  border:none;
-  border-radius:8px;
-  font-size:14px;
+  border:1px solid rgba(30,55,100,0.8);
+  border-radius:0;
+  font-size:13px;
   font-weight:600;
-  font-family:inherit;
+  font-family:'SF Mono',ui-monospace,monospace;
+  letter-spacing:.08em;
+  text-transform:uppercase;
   cursor:pointer;
-  transition:background .15s;
+  transition:background .15s, border-color .15s;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
-.submit:hover{background:#0C447C}
-.footer{margin-top:1.5rem;font-size:11px;color:#999;text-align:center}
+.submit:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.4)}
+.footer{margin-top:1.25rem;font-size:11px;color:rgba(255,255,255,0.3);text-align:left;letter-spacing:.04em}
 </style>
 </head>
 <body>
-<div class="card">
+<div class="form-wrap">
   <div class="welcome">Welcome to my online CV</div>
-  <div class="desc">Please enter your name and email to access it. Your details are used only to monitor who views this CV and will be deleted after 30 days.</div>
+  <div class="desc">Enter your name and email to access it. Your details are used only to monitor who views this CV and will be deleted after 30 days.</div>
 
   <form action="https://formspree.io/f/xbdewkqy" method="POST" id="gate-form">
     <input type="hidden" name="_next" value="https://mariaarmadach.github.io/cv-anthropic.html">
@@ -95,10 +92,13 @@ body{
     </div>
     <div class="error" id="privacy-error">Please accept the data protection policy.</div>
 
-    <button class="submit" type="button" onclick="submitForm()">Access CV →</button>
+    <button class="submit" type="button" onclick="submitForm()">
+      <span>Access CV</span>
+      <span>→</span>
+    </button>
   </form>
 
-  <div class="footer">No commercial use · Data deleted after 30 days</div>
+  <div class="footer">No commercial use &nbsp;·&nbsp; Data deleted after 30 days</div>
 </div>
 <script>
 function submitForm(){
