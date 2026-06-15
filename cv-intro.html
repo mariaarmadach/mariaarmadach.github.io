@@ -114,23 +114,23 @@ svg.lines{
 
 .scroll-cta{
   display:flex;flex-direction:column;align-items:center;gap:6px;
-  color:rgba(30,55,100,0.4);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-  text-decoration:none;transition:color .2s;
+  color:rgba(30,55,100,0.7);font-size:11px;letter-spacing:.04em;
+  text-decoration:none;transition:color .2s;font-style:italic;
 }
-.scroll-cta:hover{color:rgba(30,55,100,0.8)}
+.scroll-cta:hover{color:rgba(30,55,100,1)}
 .arrow{
   width:1px;height:28px;
-  background:rgba(30,55,100,0.2);
+  background:rgba(30,55,100,0.4);
   position:relative;animation:pulse 2s ease-in-out infinite;
 }
 .arrow::after{
   content:'';position:absolute;bottom:-4px;left:-3px;
   width:7px;height:7px;
-  border-right:1px solid rgba(30,55,100,0.35);
-  border-bottom:1px solid rgba(30,55,100,0.35);
+  border-right:1px solid rgba(30,55,100,0.6);
+  border-bottom:1px solid rgba(30,55,100,0.6);
   transform:rotate(45deg);
 }
-@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 
 /* ── CV SECTION ── */
 #cv-section{border-top:1px solid rgba(30,55,100,0.08)}
@@ -254,10 +254,6 @@ body.show-cv{overflow:auto}
 <div class="page">
   <div class="cv-header">
     <div class="cv-name">Maria Armada Churruca</div>
-    <div class="contact-btns-cv">
-      <a class="cv-btn" href="mailto:mariaarmadach@gmail.com">Email me</a>
-      <a class="cv-btn primary" href="https://calendly.com/mariaarmadach/30min" target="_blank">Book 30 min →</a>
-    </div>
   </div>
 
   <div class="layout">
