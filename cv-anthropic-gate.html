@@ -47,30 +47,41 @@ body{
 .checkbox-row.invalid-check .checkbox-label{color:#ff6b6b}
 .submit{
   width:100%;
-  padding:11px 16px;
-  background:transparent;
-  color:rgba(30,55,100,0.85);
-  border:1px solid rgba(30,55,100,0.8);
+  padding:12px 16px;
+  background:rgba(30,55,100,0.85);
+  color:transparent;
+  background-clip:text;
+  -webkit-background-clip:text;
+  border:none;
   border-radius:0;
   font-size:13px;
-  font-weight:600;
+  font-weight:700;
   font-family:'SF Mono',ui-monospace,monospace;
-  letter-spacing:.08em;
+  letter-spacing:.1em;
   text-transform:uppercase;
   cursor:pointer;
-  transition:background .15s, border-color .15s;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  transition:opacity .15s;
+  display:block;
+  text-align:center;
+  position:relative;
+  isolation:isolate;
 }
-.submit:hover{background:rgba(30,55,100,0.08);border-color:rgba(30,55,100,0.5)}
-.footer{margin-top:1.25rem;font-size:11px;color:rgba(30,55,100,0.35);text-align:left;letter-spacing:.04em}
+.submit::before{
+  content:'';
+  position:absolute;inset:0;
+  background:rgba(30,55,100,0.85);
+  z-index:-1;
+}
+.submit{color:#fff}
+.submit:hover::before{background:rgba(30,55,100,1)}
+.clarification{margin-top:.65rem;font-size:11px;color:rgba(30,55,100,0.5);line-height:1.5}
+.footer{margin-top:1.5rem;font-size:11px;color:rgba(30,55,100,0.75);text-align:left;letter-spacing:.04em;font-weight:500}
 </style>
 </head>
 <body>
 <div class="form-wrap">
   <div class="welcome">Hey, nice to meet you.</div>
-  <div class="desc">Drop your name and email below — just for monitoring purposes — and we can get going. No spam, no weird stuff, data's gone in 30 days.</div>
+  <div class="desc">Drop your name and email below — just for monitoring purposes — and we can get going.</div>
 
   <form action="https://formspree.io/f/xbdewkqy" method="POST" id="gate-form">
     <input type="hidden" name="_next" value="https://mariaarmadach.github.io/cv-anthropic.html">
@@ -92,10 +103,8 @@ body{
     </div>
     <div class="error" id="privacy-error">Please accept the data protection policy.</div>
 
-    <button class="submit" type="button" onclick="submitForm()">
-      <span>Access CV</span>
-      <span>→</span>
-    </button>
+    <button class="submit" type="button" onclick="submitForm()">Access CV →</button>
+    <div class="clarification">No spam, no weird stuff — data's gone in 30 days.</div>
   </form>
 
   <div class="footer">No commercial use &nbsp;·&nbsp; Data deleted after 30 days</div>
