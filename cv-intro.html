@@ -197,6 +197,20 @@ body.show-cv{overflow:auto}
     <!-- SVG connector lines, drawn by JS after layout -->
     <svg class="lines" id="svg-lines"></svg>
 
+    <!-- Central text -->
+    <div id="center-text" style="
+      position:absolute;
+      top:50%;left:50%;
+      transform:translate(-50%,-48%);
+      text-align:center;
+      max-width:200px;
+      pointer-events:none;
+    ">
+      <div style="font-size:11px;line-height:1.65;color:rgba(30,55,100,0.5);font-style:italic;">
+        A quick review of the job requirements and where my experience maps directly — for your revision
+      </div>
+    </div>
+
     <div class="label l1" id="l1">
       <div class="label-title">Sustainability &amp; structural change <span style="font-weight:400;opacity:.6">(EY)</span></div>
       <div class="label-body">In-house consulting for large enterprises navigating ESG disruption — translating regulatory complexity into operational priorities and embedding transformation across business units, markets and supply chains.</div>
