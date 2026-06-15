@@ -6,155 +6,100 @@
 <title>What brought us here — Maria Armada Churruca</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
+html,body{height:100%;overflow:hidden}
 body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   background:url('background.jpg') center center / cover no-repeat fixed;
   color:rgba(30,55,100,0.9);
+}
+body.show-cv{overflow:auto}
+
+.intro{
+  height:100vh;
+  position:relative;
   overflow:hidden;
 }
 
-/* ── INTRO: full screen ── */
-.intro{
-  height:100vh;
-  display:grid;
-  grid-template-rows:auto 1fr auto;
-  padding:2.5rem 3rem 2rem;
-  position:relative;
+/* top bar */
+.topbar{
+  position:absolute;top:2rem;left:2.5rem;right:2.5rem;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  z-index:10;
 }
+.intro-name{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:rgba(30,55,100,0.4)}
+.intro-heading{font-size:clamp(18px,2.5vw,28px);font-weight:600;color:rgba(30,55,100,0.9);letter-spacing:-.02em;text-align:right}
 
-/* ── HEADER ── */
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  margin-bottom:1rem;
-}
-.intro-name{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:rgba(30,55,100,0.4)}
-.intro-title{font-size:clamp(22px,3.5vw,38px);font-weight:600;color:rgba(30,55,100,0.95);letter-spacing:-.02em;line-height:1.2;max-width:420px}
+/* SVG path layer */
+.path-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 
-/* ── ANNOTATION DIAGRAM ── */
-.diagram{
-  position:relative;
-  width:100%;
-  height:100%;
-}
-svg.lines{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-}
-.label{
-  position:absolute;
-  max-width:240px;
-}
-.label-title{
-  font-size:12px;
-  font-weight:700;
-  color:rgba(30,55,100,0.9);
-  margin-bottom:3px;
-  letter-spacing:.01em;
-}
-.label-body{
-  font-size:11px;
-  color:rgba(30,55,100,0.6);
-  line-height:1.6;
-}
-/* LEFT labels — text flush right edge toward spine */
-.l1{top:4%;left:2%}
-.l3{top:44%;left:2%}
-/* RIGHT labels — text flush left toward spine */
-.l2{top:4%;right:2%;text-align:right}
-.l4{top:44%;right:2%;text-align:right}
-/* BOTTOM center */
-.l5{bottom:4%;left:50%;transform:translateX(-50%);text-align:center;max-width:320px}
-.l5 .label-title{font-size:13px;font-style:italic;color:rgba(30,55,100,0.95)}
-.l5 .label-body{font-size:12px;font-style:italic;color:rgba(30,55,100,0.65)}
-/* CENTER text */
-.center-text{
-  position:absolute;
-  top:50%;left:50%;
+/* labels */
+.label{position:absolute;max-width:210px}
+.label-title{font-size:12px;font-weight:700;color:rgba(30,55,100,0.9);margin-bottom:4px;line-height:1.3}
+.label-company{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(30,55,100,0.4);margin-bottom:5px}
+.label-body{font-size:10.5px;color:rgba(30,55,100,0.6);line-height:1.6}
+
+/* label positions — matching sketch */
+#l-ey    {top:8%; right:4%; text-align:right}
+#l-bcg   {top:42%; right:3%; text-align:right}
+#l-refill{top:18%; left:36%}
+#l-dcycle{top:52%; left:22%}
+#l-next  {bottom:14%; left:4%; max-width:260px}
+
+#l-next .label-title{font-size:13px;font-style:italic;color:rgba(30,55,100,0.95)}
+#l-next .label-body{font-size:11px;font-style:italic;color:rgba(30,55,100,0.65)}
+
+/* center hint */
+.center-hint{
+  position:absolute;top:50%;left:50%;
   transform:translate(-50%,-50%);
-  text-align:center;
-  max-width:160px;
-  pointer-events:none;
+  text-align:center;max-width:150px;pointer-events:none;
 }
-.center-text p{
-  font-size:10.5px;
-  line-height:1.65;
-  color:rgba(30,55,100,0.4);
-  font-style:italic;
-}
+.center-hint p{font-size:10px;line-height:1.65;color:rgba(30,55,100,0.35);font-style:italic}
 
-/* ── BOTTOM BAR ── */
-.bottom{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  padding-top:.75rem;
+/* bottom cta */
+.bottom-cta{
+  position:absolute;bottom:2rem;
+  display:flex;flex-direction:column;gap:1rem;
 }
-.contact-btns{display:flex;gap:.5rem}
+.btns-wrap{display:flex;gap:.5rem}
 .contact-btn{
-  padding:8px 14px;
-  font-size:11px;font-weight:600;
+  padding:8px 14px;font-size:11px;font-weight:600;
   font-family:'SF Mono',ui-monospace,monospace;
   letter-spacing:.06em;text-transform:uppercase;
   border:1px solid rgba(30,55,100,0.45);
   background:rgba(255,255,255,0.4);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  color:rgba(30,55,100,0.8);
-  text-decoration:none;display:inline-block;
-  transition:all .15s;border-radius:0;
+  color:rgba(30,55,100,0.8);text-decoration:none;
+  display:inline-block;transition:all .15s;border-radius:0;
 }
-.contact-btn:hover{background:rgba(255,255,255,0.65);border-color:rgba(30,55,100,0.7);color:rgba(30,55,100,1)}
+.contact-btn:hover{background:rgba(255,255,255,0.65);color:rgba(30,55,100,1)}
 .contact-btn.primary{background:rgba(30,55,100,0.85);color:#fff;border-color:rgba(30,55,100,0.85)}
 .contact-btn.primary:hover{background:rgba(30,55,100,1)}
 
+/* contact left, scroll right */
+.bottom-left{left:2.5rem}
 .scroll-cta{
+  position:absolute;bottom:2rem;right:2.5rem;
   display:flex;flex-direction:column;align-items:center;gap:6px;
-  color:rgba(30,55,100,0.7);font-size:11px;letter-spacing:.04em;
-  text-decoration:none;transition:color .2s;font-style:italic;
+  color:rgba(30,55,100,0.65);font-size:11px;font-style:italic;
+  text-decoration:none;transition:color .2s;
 }
 .scroll-cta:hover{color:rgba(30,55,100,1)}
-.arrow{
-  width:1px;height:28px;
-  background:rgba(30,55,100,0.4);
-  position:relative;animation:pulse 2s ease-in-out infinite;
-}
-.arrow::after{
+.arrow-line{width:1px;height:28px;background:rgba(30,55,100,0.35);position:relative;animation:pulse 2s ease-in-out infinite}
+.arrow-line::after{
   content:'';position:absolute;bottom:-4px;left:-3px;
   width:7px;height:7px;
-  border-right:1px solid rgba(30,55,100,0.6);
-  border-bottom:1px solid rgba(30,55,100,0.6);
+  border-right:1px solid rgba(30,55,100,0.55);
+  border-bottom:1px solid rgba(30,55,100,0.55);
   transform:rotate(45deg);
 }
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 
 /* ── CV SECTION ── */
 #cv-section{border-top:1px solid rgba(30,55,100,0.08)}
-body.show-cv{overflow:auto}
-
-/* ─── CV STYLES ─── */
 .page{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
-.cv-header{
-  padding:2rem 0 1.5rem;border-bottom:1px solid rgba(30,55,100,0.2);margin-bottom:2rem;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
-}
+.cv-header{padding:2rem 0 1.5rem;border-bottom:1px solid rgba(30,55,100,0.2);margin-bottom:2rem}
 .cv-name{font-size:24px;font-weight:600;color:rgba(30,55,100,0.95)}
-.contact-btns-cv{display:flex;gap:.5rem}
-.cv-btn{
-  padding:8px 14px;font-size:12px;font-weight:600;
-  font-family:'SF Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;
-  border:1px solid rgba(30,55,100,0.4);background:rgba(255,255,255,0.45);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  color:rgba(30,55,100,0.8);text-decoration:none;display:inline-block;
-  transition:all .15s;border-radius:0;
-}
-.cv-btn:hover{background:rgba(255,255,255,0.65);border-color:rgba(30,55,100,0.7)}
-.cv-btn.primary{background:rgba(30,55,100,0.85);color:#fff;border-color:rgba(30,55,100,0.85)}
-.cv-btn.primary:hover{background:rgba(30,55,100,1)}
 .layout{display:grid;grid-template-columns:240px 1fr;gap:2rem}
 .left-panel{position:sticky;top:2rem;align-self:start}
 .panel-title{font-size:10px;font-weight:600;color:rgba(30,55,100,0.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
@@ -192,61 +137,69 @@ body.show-cv{overflow:auto}
 .skill-tag.dimmed{opacity:.2}
 .edu-line{font-size:13px;color:rgba(30,55,100,0.75);margin-bottom:1.5rem}
 .footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(30,55,100,0.1);font-size:11px;color:rgba(30,55,100,0.3);text-align:center;letter-spacing:.04em}
-@media(max-width:700px){.layout{grid-template-columns:1fr}.left-panel{position:relative;top:0}.cv-header{flex-direction:column;align-items:flex-start}}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.left-panel{position:relative;top:0}}
 </style>
 </head>
 <body>
 
-<!-- ── INTRO ── -->
 <section class="intro" id="intro">
-  <div class="header">
+
+  <div class="topbar">
     <div class="intro-name">Maria Armada Churruca</div>
-    <h1 class="intro-title">What brought us here?</h1>
+    <div class="intro-heading">What brought us here?</div>
   </div>
 
-  <div class="diagram" id="diagram">
-    <svg class="lines" id="svg-lines"></svg>
+  <!-- SVG: drawn by JS -->
+  <svg class="path-svg" id="path-svg"></svg>
 
-    <div class="center-text">
-      <p>A quick review of the job requirements and where my experience maps directly</p>
-    </div>
-
-    <div class="label l1" id="l1">
-      <div class="label-title">Sustainability &amp; structural change <span style="font-weight:400;opacity:.6">(EY)</span></div>
-      <div class="label-body">In-house consulting for large enterprises navigating ESG disruption — translating regulatory complexity into operational priorities and embedding transformation across business units, markets and supply chains.</div>
-    </div>
-
-    <div class="label l2" id="l2">
-      <div class="label-title">Circular economy &amp; value engineering <span style="font-weight:400;opacity:.6">(BCG)</span></div>
-      <div class="label-body">Building the business case for structural transformation — new circular business models, M&amp;A pilots, offering generation. Helping companies understand what the disruption is actually worth, and how to act on it.</div>
-    </div>
-
-    <div class="label l3" id="l3">
-      <div class="label-title">Real operations &amp; supply chain <span style="font-weight:400;opacity:.6">(Refill)</span></div>
-      <div class="label-body">Co-founded a circular packaging venture — activating the model in practice: product definition, GTM, supply chain. From concept to operations in an adverse early-stage environment.</div>
-    </div>
-
-    <div class="label l4" id="l4">
-      <div class="label-title">ESG tech → data infrastructure → solution engineering <span style="font-weight:400;opacity:.6">(Dcycle)</span></div>
-      <div class="label-body">The market shifted from advisory to software. I moved with it — building the Solutions function, engineering customised integrations for enterprise clients, and automating internal workflows end-to-end with AI. That is where I met Claude Code, and where this trajectory clicks.</div>
-    </div>
-
-    <div class="label l5" id="l5">
-      <div class="label-title">Next</div>
-      <div class="label-body">I want to take this to the next level — working at the frontier of AI and enterprise, where the disruption is being built, not just deployed. <strong style="color:rgba(30,55,100,0.95)">Is it Anthropic?</strong></div>
-    </div>
+  <!-- Labels -->
+  <div class="label" id="l-ey">
+    <div class="label-title">Sustainability &amp; structural change</div>
+    <div class="label-company">EY · 2020–2022</div>
+    <div class="label-body">In-house consulting for large enterprises navigating ESG disruption — translating regulatory complexity into operational priorities and embedding transformation across business units, markets and supply chains.</div>
   </div>
 
-  <div class="bottom">
-    <div class="contact-btns">
+  <div class="label" id="l-bcg">
+    <div class="label-title">Circular economy &amp; value engineering</div>
+    <div class="label-company">BCG · 2023</div>
+    <div class="label-body">Building the business case for structural transformation — new circular business models, M&amp;A pilots, offering generation. Helping companies understand what the disruption is actually worth, and how to act on it.</div>
+  </div>
+
+  <div class="label" id="l-refill">
+    <div class="label-title">Real operations &amp; supply chain</div>
+    <div class="label-company">Refill · 2023–2024</div>
+    <div class="label-body">Co-founded a circular packaging venture — activating the model in practice: product definition, GTM, supply chain. From concept to operations in an adverse early-stage environment.</div>
+  </div>
+
+  <div class="label" id="l-dcycle">
+    <div class="label-title">ESG tech → data infrastructure → solution engineering</div>
+    <div class="label-company">Dcycle · 2025–present</div>
+    <div class="label-body">The market shifted from advisory to software. I moved with it — building the Solutions function, engineering customised integrations for enterprise clients, and automating internal workflows end-to-end with AI. That is where I met Claude Code, and where this trajectory clicks.</div>
+  </div>
+
+  <div class="label" id="l-next">
+    <div class="label-title">Next</div>
+    <div class="label-body">I want to take this to the next level — working at the frontier of AI and enterprise, where the disruption is being built, not just deployed. <strong style="color:rgba(30,55,100,0.95)">Is it Anthropic?</strong></div>
+  </div>
+
+  <div class="center-hint">
+    <p>A quick review of the job requirements and where my experience maps directly</p>
+  </div>
+
+  <!-- Bottom left: contact buttons -->
+  <div class="bottom-cta bottom-left">
+    <div class="btns-wrap">
       <a class="contact-btn" href="mailto:mariaarmadach@gmail.com">Email me</a>
       <a class="contact-btn primary" href="https://calendly.com/mariaarmadach/30min" target="_blank">Book 30 min →</a>
     </div>
-    <a class="scroll-cta" href="#cv-section" onclick="document.body.classList.add('show-cv')">
-      <div class="arrow"></div>
-      <span>See the detail</span>
-    </a>
   </div>
+
+  <!-- Bottom right: scroll cta -->
+  <a class="scroll-cta" href="#cv-section" onclick="document.body.classList.add('show-cv')">
+    <div class="arrow-line"></div>
+    <span>see the detail</span>
+  </a>
+
 </section>
 
 <!-- ── CV ── -->
@@ -255,7 +208,6 @@ body.show-cv{overflow:auto}
   <div class="cv-header">
     <div class="cv-name">Maria Armada Churruca</div>
   </div>
-
   <div class="layout">
     <div class="left-panel">
       <div class="panel-title">Anthropic — Applied AI</div>
@@ -270,14 +222,11 @@ body.show-cv{overflow:auto}
       <button class="req-btn" data-req="fast" onclick="filter('fast')">Fast-paced environment</button>
       <button class="reset-btn" onclick="reset()">Clear filter</button>
     </div>
-
     <div>
       <div class="cv-section">About</div>
       <p class="cv-about" data-tags="translate exec enterprise">Background in consulting and entrepreneurship at the forefront of two structural disruptions — ESG and AI — helping large enterprises understand complex shifts, build the business case for transformation, and implement the solutions. My core skill is translating complexity into clear, actionable narratives adapted to any audience: from engineering teams to C-suite, from regulators to PE investors.</p>
       <p class="cv-about" data-tags="ai technical">I work natively with AI as an integrated working model — not as a concept, but in production. I have built end-to-end with Claude Code: mobile applications with AI agents, web platforms with CRM and payment integrations, and interactive financial tools.</p>
-
       <div class="cv-section">Experience</div>
-
       <div class="role-title">Strategic Solutions Engineer</div>
       <div class="role-company">Dcycle &nbsp;·&nbsp; 2025 – Present</div>
       <div class="bullet" data-tags="enterprise translate exec fast">Built the Solutions department from scratch: designed a value engineering methodology translating complex AI and regulatory requirements into enterprise business cases — raising team conversion from 35% to 60% and average ticket from €11k to €14k in a 3-month pilot (Oct–Dec 2024).</div>
@@ -285,26 +234,21 @@ body.show-cv{overflow:auto}
       <div class="bullet" data-tags="stakeholder fast">Verticalised team by industry and built a knowledge programme for commercial autonomy, turning individual methodology into a scalable and replicable model.</div>
       <div class="bullet" data-tags="ai technical eval">Automated proposal generation and internal reporting through full system integration (CRM, pricing platforms, client history) with AI, saving 70 hours per month and eliminating ~100 hours of annual manual work.</div>
       <div class="bullet" data-tags="enterprise stakeholder fast translate">Managed strategic portfolio under regulatory disruption: reframed value proposition in real time and redirected 40% of strategic client base in mid-implementation with zero client loss.</div>
-
       <div class="role-title">Co-Founder</div>
       <div class="role-company">REFILL &nbsp;·&nbsp; 2023–2024</div>
       <div class="refill-line" data-tags="fast">Packaging as a Service (zero waste supply chain): product definition, GTM and operations. Early-stage market and adverse capital environment.</div>
-
       <div class="role-title">Knowledge Specialist, Circular Economy</div>
       <div class="role-company">BCG &nbsp;·&nbsp; 2023</div>
       <div class="bullet" data-tags="translate exec enterprise">Helped large corporates build the business case for structural transformation — translating complex systemic shifts into executive roadmaps and commercial strategies deployable across business units and geographies.</div>
       <div class="bullet" data-tags="eval technical stakeholder">Identified absence of insurance coverage for recycling plants as the primary barrier to M&amp;A in the sector; designed pilot structure with IKEA as anchor investor — aligned with Ingka Investments' €1bn commitment to circular infrastructure and 2030 circularity targets — to unlock coverage and reactivate transactional activity.</div>
       <div class="bullet" data-tags="enterprise eval">Supported due diligence for corporate clients navigating structural transitions.</div>
-
       <div class="role-title">Sustainable Operations Consultant</div>
       <div class="role-company">EY &nbsp;·&nbsp; 2020–2022</div>
       <div class="bullet" data-tags="enterprise stakeholder exec translate">In-house consulting for Corporate Managing Director of Tendam (retail, +10,000 employees, 75 markets) over 18 months under PE mandate (PAI Partners, €7bn): translated complex investor requirements into operational priorities, managed the investor relationship directly, and activated internal initiatives — contributing to EcoVadis top 1% worldwide recognition.</div>
       <div class="bullet" data-tags="translate exec enterprise eval">Helped enterprise clients across multiple sectors understand and operationalise structural regulatory shifts: diagnosis, prioritisation and implementation of operational roadmaps delivered to C-suite and board audiences.</div>
       <div class="bullet" data-tags="eval stakeholder">Mapped Spain's social investment ecosystem and developed impact measurement frameworks for institutional investors.</div>
-
       <div class="cv-section">Education</div>
       <div class="edu-line">Master in Management &nbsp;·&nbsp; IE Business School &nbsp;·&nbsp; 2019–2020</div>
-
       <div class="cv-section">Skills</div>
       <div class="skills-row">
         <span class="skill-tag" data-tags="translate exec enterprise">Value Engineering</span>
@@ -316,7 +260,6 @@ body.show-cv{overflow:auto}
         <span class="skill-tag" data-tags="eval technical">Data Analysis</span>
         <span class="skill-tag" data-tags="stakeholder fast">Change Management</span>
       </div>
-
       <div class="cv-section">Tools</div>
       <div class="skills-row">
         <span class="skill-tag" data-tags="ai technical">Claude Code</span>
@@ -329,99 +272,93 @@ body.show-cv{overflow:auto}
       </div>
     </div>
   </div>
-
   <div class="footer">Built with Claude Code &nbsp;·&nbsp; Maria Armada Churruca 2026</div>
 </div>
 </section>
 
 <script>
-/* ── botanical annotation lines: horizontal from label → curve to vertical spine ── */
-function drawLines(){
-  const diagram = document.getElementById('diagram');
-  const svg = document.getElementById('svg-lines');
-  const W = diagram.offsetWidth;
-  const H = diagram.offsetHeight;
+/* Draw a winding path connecting labels in sequence with dots */
+function drawPath(){
+  const svg = document.getElementById('path-svg');
+  const W = window.innerWidth;
+  const H = window.innerHeight;
 
-  /* spine: vertical line at x=50% */
-  const spineX = W * 0.5;
-  const spineTop = H * 0.06;
-  const spineBot = H * 0.80;
+  /* anchor points for each label (% of screen) — matching sketch positions */
+  function anchor(id, side){
+    const el = document.getElementById(id);
+    if(!el) return null;
+    const r = el.getBoundingClientRect();
+    if(side==='left')  return {x: r.left,            y: r.top + r.height*0.4};
+    if(side==='right') return {x: r.right,           y: r.top + r.height*0.4};
+    if(side==='top')   return {x: r.left + r.width/2, y: r.top};
+    if(side==='bottom')return {x: r.left + r.width/2, y: r.bottom};
+    return {x: r.left + r.width/2, y: r.top + r.height/2};
+  }
 
-  /* spine y positions for each label (where the curve meets the spine) */
-  const spineY = { l1: H*0.22, l2: H*0.32, l3: H*0.52, l4: H*0.62 };
+  const pts = [
+    anchor('l-ey',    'left'),
+    anchor('l-refill','right'),
+    anchor('l-bcg',   'left'),
+    anchor('l-dcycle','right'),
+    anchor('l-next',  'top'),
+  ];
 
-  let out = '';
+  if(pts.some(p=>!p)) return;
 
-  /* spine line */
-  out += `<line x1="${spineX}" y1="${spineTop}" x2="${spineX}" y2="${spineBot}"
-    stroke="rgba(30,55,100,0.18)" stroke-width="1"/>`;
+  /* Build smooth path through points */
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for(let i=0;i<pts.length-1;i++){
+    const a=pts[i], b=pts[i+1];
+    const cpx1 = a.x + (b.x-a.x)*0.5;
+    const cpy1 = a.y;
+    const cpx2 = a.x + (b.x-a.x)*0.5;
+    const cpy2 = b.y;
+    d += ` C ${cpx1} ${cpy1} ${cpx2} ${cpy2} ${b.x} ${b.y}`;
+  }
 
-  /* spine dots */
-  Object.values(spineY).forEach(sy => {
-    out += `<circle cx="${spineX}" cy="${sy}" r="2.5"
-      fill="rgba(30,55,100,0.35)"/>`;
+  /* Dots along each segment */
+  let dots = '';
+  const N = 8;
+  for(let i=0;i<pts.length-1;i++){
+    const a=pts[i], b=pts[i+1];
+    for(let t=0.1;t<1;t+=1/N){
+      const cpx1 = a.x + (b.x-a.x)*0.5, cpy1=a.y;
+      const cpx2 = a.x + (b.x-a.x)*0.5, cpy2=b.y;
+      /* cubic bezier point */
+      const u=1-t;
+      const x = u*u*u*a.x + 3*u*u*t*cpx1 + 3*u*t*t*cpx2 + t*t*t*b.x;
+      const y = u*u*u*a.y + 3*u*u*t*cpy1 + 3*u*t*t*cpy2 + t*t*t*b.y;
+      dots += `<circle cx="${x}" cy="${y}" r="1.8" fill="rgba(30,55,100,0.3)"/>`;
+    }
+  }
+
+  /* endpoint dots on labels */
+  let endDots = '';
+  pts.forEach(p=>{
+    endDots += `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="none" stroke="rgba(30,55,100,0.5)" stroke-width="1"/>
+                <circle cx="${p.x}" cy="${p.y}" r="1.5" fill="rgba(30,55,100,0.5)"/>`;
   });
 
-  /* bottom spine dot */
-  out += `<circle cx="${spineX}" cy="${spineBot}" r="2.5" fill="rgba(30,55,100,0.5)"/>`;
-
-  /* label connector: cubic bezier that leaves label horizontally, arrives spine vertically */
-  function connector(id, side) {
-    const el = document.getElementById(id);
-    if (!el) return '';
-    const r = el.getBoundingClientRect();
-    const dr = diagram.getBoundingClientRect();
-    /* anchor: right edge for left labels, left edge for right labels */
-    const ax = side === 'left'  ? r.right - dr.left : r.left - dr.left;
-    const ay = r.top - dr.top + r.height * 0.35;
-    const sy = spineY[id];
-    /* control points: first goes horizontal, second arrives from above/below */
-    const cp1x = side === 'left' ? ax + (spineX - ax) * 0.7 : ax - (ax - spineX) * 0.7;
-    const cp1y = ay;
-    const cp2x = spineX;
-    const cp2y = sy + (ay < sy ? -30 : 30);
-    return `<path d="M ${ax} ${ay} C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${spineX} ${sy}"
-      fill="none" stroke="rgba(30,55,100,0.2)" stroke-width="1"/>
-      <circle cx="${ax}" cy="${ay}" r="2" fill="rgba(30,55,100,0.3)"/>`;
-  }
-
-  out += connector('l1','left');
-  out += connector('l2','right');
-  out += connector('l3','left');
-  out += connector('l4','right');
-
-  /* l5 connects straight up from its center to spine bottom */
-  const l5 = document.getElementById('l5');
-  if (l5) {
-    const r = l5.getBoundingClientRect();
-    const dr = diagram.getBoundingClientRect();
-    const lx = r.left - dr.left + r.width/2;
-    const ly = r.top - dr.top;
-    out += `<path d="M ${lx} ${ly} Q ${lx} ${spineBot+10} ${spineX} ${spineBot}"
-      fill="none" stroke="rgba(30,55,100,0.2)" stroke-width="1"/>`;
-  }
-
-  svg.innerHTML = out;
+  svg.innerHTML = `
+    <path d="${d}" fill="none" stroke="rgba(30,55,100,0.12)" stroke-width="1.5"/>
+    ${dots}
+    ${endDots}
+  `;
 }
 
-window.addEventListener('load', drawLines);
-window.addEventListener('resize', drawLines);
+window.addEventListener('load', drawPath);
+window.addEventListener('resize', drawPath);
 
-/* scroll to cv unlocks scroll */
-document.querySelector('.scroll-cta').addEventListener('click', ()=>{
-  document.body.classList.add('show-cv');
-});
-
-/* cv filter */
+/* CV filter */
 let active=null;
 function filter(req){
   if(active===req){reset();return;}
   active=req;
   document.querySelectorAll('.req-btn').forEach(b=>b.classList.toggle('active',b.dataset.req===req));
   document.querySelectorAll('[data-tags]').forEach(el=>{
-    const matches=el.dataset.tags.split(' ').includes(req);
+    const m=el.dataset.tags.split(' ').includes(req);
     el.classList.remove('highlight','dimmed');
-    el.classList.add(matches?'highlight':'dimmed');
+    el.classList.add(m?'highlight':'dimmed');
   });
 }
 function reset(){
