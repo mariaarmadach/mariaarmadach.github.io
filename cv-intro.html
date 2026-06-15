@@ -6,235 +6,174 @@
 <title>What brought us here — Maria Armada Churruca</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html,body{height:100%}
 body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   background:url('background.jpg') center center / cover no-repeat fixed;
-  color:#fff;
-  min-height:100vh;
+  color:rgba(30,55,100,0.9);
+  overflow:hidden;
 }
 
-/* ── INTRO SECTION ── */
+/* ── INTRO: full screen ── */
 .intro{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:3rem 2rem 5rem;
+  height:100vh;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  padding:2.5rem 3rem 2rem;
   position:relative;
 }
 
-.title{
-  font-size:13px;
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:.15em;
-  color:rgba(255,255,255,0.45);
-  margin-bottom:1rem;
-  text-align:center;
-}
-.heading{
-  font-size:clamp(28px,5vw,48px);
-  font-weight:600;
-  color:#fff;
-  text-align:center;
-  margin-bottom:4rem;
-  letter-spacing:-.02em;
-  line-height:1.2;
-}
-
-/* ── TIMELINE ── */
-.timeline{
-  max-width:680px;
-  width:100%;
-  position:relative;
-}
-.timeline::before{
-  content:'';
-  position:absolute;
-  left:18px;
-  top:8px;
-  bottom:8px;
-  width:1px;
-  background:rgba(255,255,255,0.2);
-}
-.step{
+/* ── HEADER ── */
+.header{
   display:flex;
-  gap:2rem;
-  margin-bottom:2.75rem;
-  position:relative;
-}
-.step:last-child{margin-bottom:0}
-.node{
-  flex-shrink:0;
-  width:37px;
-  display:flex;
+  justify-content:space-between;
   align-items:flex-start;
-  padding-top:3px;
+  margin-bottom:1rem;
 }
-.dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,0.6);
-  background:transparent;
-  margin:0 auto;
-  margin-left:10px;
-  flex-shrink:0;
-}
-.dot.active{
-  background:#fff;
-  border-color:#fff;
-  box-shadow:0 0 10px rgba(255,255,255,0.4);
-}
-.content{}
-.step-label{
-  font-size:10px;
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:rgba(255,255,255,0.4);
-  margin-bottom:5px;
-}
-.step-text{
-  font-size:14px;
-  color:rgba(255,255,255,0.85);
-  line-height:1.75;
-}
-.step-text strong{
-  color:#fff;
-  font-weight:600;
-}
+.intro-name{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:rgba(30,55,100,0.4)}
+.intro-title{font-size:clamp(22px,3.5vw,38px);font-weight:600;color:rgba(30,55,100,0.95);letter-spacing:-.02em;line-height:1.2;max-width:420px}
 
-/* ── FINAL STEP ── */
-.step.final .step-text{
-  color:#fff;
-  font-size:15px;
-  font-style:italic;
-}
-.step.final .dot{
-  background:#fff;
-  box-shadow:0 0 14px rgba(255,255,255,0.5);
-}
-
-/* ── SCROLL CTA ── */
-.scroll-cta{
-  position:absolute;
-  bottom:2.5rem;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  color:rgba(255,255,255,0.4);
-  font-size:11px;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  text-decoration:none;
-  transition:color .2s;
-}
-.scroll-cta:hover{color:rgba(255,255,255,0.8)}
-.arrow{
-  width:1px;
-  height:32px;
-  background:rgba(255,255,255,0.25);
+/* ── ANNOTATION DIAGRAM ── */
+.diagram{
   position:relative;
-  animation:pulse 2s ease-in-out infinite;
+  width:100%;
+  height:100%;
+}
+svg.lines{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:visible;
+}
+
+.label{
+  position:absolute;
+  max-width:280px;
+}
+.label-title{
+  font-size:12px;
+  font-weight:700;
+  color:rgba(30,55,100,0.9);
+  margin-bottom:3px;
+  letter-spacing:.01em;
+}
+.label-body{
+  font-size:11.5px;
+  color:rgba(30,55,100,0.65);
+  line-height:1.6;
+}
+
+/* positions — arranged around a central anchor */
+/* anchor: roughly 50% 55% of the diagram area */
+.l1{top:2%;left:4%}
+.l2{top:2%;right:4%;text-align:right}
+.l3{top:40%;left:1%}
+.l4{top:40%;right:2%;text-align:right}
+.l5{bottom:8%;left:35%;text-align:center;max-width:340px}
+
+/* final "Is it Anthropic?" */
+.l5 .label-title{font-size:14px;font-style:italic;color:rgba(30,55,100,0.95)}
+.l5 .label-body{font-size:12px;font-style:italic;color:rgba(30,55,100,0.7)}
+
+/* ── BOTTOM BAR ── */
+.bottom{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  padding-top:.75rem;
+}
+.contact-btns{display:flex;gap:.5rem}
+.contact-btn{
+  padding:8px 14px;
+  font-size:11px;font-weight:600;
+  font-family:'SF Mono',ui-monospace,monospace;
+  letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid rgba(30,55,100,0.45);
+  background:rgba(255,255,255,0.4);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  color:rgba(30,55,100,0.8);
+  text-decoration:none;display:inline-block;
+  transition:all .15s;border-radius:0;
+}
+.contact-btn:hover{background:rgba(255,255,255,0.65);border-color:rgba(30,55,100,0.7);color:rgba(30,55,100,1)}
+.contact-btn.primary{background:rgba(30,55,100,0.85);color:#fff;border-color:rgba(30,55,100,0.85)}
+.contact-btn.primary:hover{background:rgba(30,55,100,1)}
+
+.scroll-cta{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:rgba(30,55,100,0.4);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;transition:color .2s;
+}
+.scroll-cta:hover{color:rgba(30,55,100,0.8)}
+.arrow{
+  width:1px;height:28px;
+  background:rgba(30,55,100,0.2);
+  position:relative;animation:pulse 2s ease-in-out infinite;
 }
 .arrow::after{
-  content:'';
-  position:absolute;
-  bottom:-4px;
-  left:-3px;
-  width:7px;
-  height:7px;
-  border-right:1px solid rgba(255,255,255,0.4);
-  border-bottom:1px solid rgba(255,255,255,0.4);
+  content:'';position:absolute;bottom:-4px;left:-3px;
+  width:7px;height:7px;
+  border-right:1px solid rgba(30,55,100,0.35);
+  border-bottom:1px solid rgba(30,55,100,0.35);
   transform:rotate(45deg);
 }
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
 /* ── CV SECTION ── */
-#cv-section{
-  border-top:1px solid rgba(255,255,255,0.08);
-}
+#cv-section{border-top:1px solid rgba(30,55,100,0.08)}
+body.show-cv{overflow:auto}
 
 /* ─── CV STYLES ─── */
 .page{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
 .cv-header{
-  padding:2rem 0 1.5rem;
-  border-bottom:1px solid rgba(30,55,100,0.2);
-  margin-bottom:2rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:1rem;
+  padding:2rem 0 1.5rem;border-bottom:1px solid rgba(30,55,100,0.2);margin-bottom:2rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
 }
 .cv-name{font-size:24px;font-weight:600;color:rgba(30,55,100,0.95)}
-.contact-btns{display:flex;gap:.5rem}
-.contact-btn{
-  padding:8px 14px;
-  font-size:12px;
-  font-weight:600;
-  font-family:'SF Mono',ui-monospace,monospace;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  border:1px solid rgba(30,55,100,0.4);
-  background:transparent;
-  color:rgba(30,55,100,0.8);
-  cursor:pointer;
-  text-decoration:none;
-  display:inline-block;
-  transition:all .15s;
-  border-radius:0;
+.contact-btns-cv{display:flex;gap:.5rem}
+.cv-btn{
+  padding:8px 14px;font-size:12px;font-weight:600;
+  font-family:'SF Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid rgba(30,55,100,0.4);background:rgba(255,255,255,0.45);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  color:rgba(30,55,100,0.8);text-decoration:none;display:inline-block;
+  transition:all .15s;border-radius:0;
 }
-.contact-btn:hover{background:rgba(30,55,100,0.08);border-color:rgba(30,55,100,0.7);color:rgba(30,55,100,1)}
-.contact-btn.primary{background:rgba(30,55,100,0.85);color:#fff;border-color:rgba(30,55,100,0.85)}
-.contact-btn.primary:hover{background:rgba(30,55,100,1)}
-
+.cv-btn:hover{background:rgba(255,255,255,0.65);border-color:rgba(30,55,100,0.7)}
+.cv-btn.primary{background:rgba(30,55,100,0.85);color:#fff;border-color:rgba(30,55,100,0.85)}
+.cv-btn.primary:hover{background:rgba(30,55,100,1)}
 .layout{display:grid;grid-template-columns:240px 1fr;gap:2rem}
 .left-panel{position:sticky;top:2rem;align-self:start}
 .panel-title{font-size:10px;font-weight:600;color:rgba(30,55,100,0.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
 .hint{font-size:11px;color:rgba(30,55,100,0.4);margin-bottom:12px;line-height:1.5}
 .req-btn{
-  display:block;width:100%;text-align:left;
-  padding:9px 12px;border-radius:0;
-  border:1px solid rgba(30,55,100,0.55);
-  background:rgba(255,255,255,0.45);
+  display:block;width:100%;text-align:left;padding:9px 12px;border-radius:0;
+  border:1px solid rgba(30,55,100,0.55);background:rgba(255,255,255,0.45);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  color:rgba(30,55,100,0.85);
-  cursor:pointer;font-size:12px;line-height:1.4;margin-bottom:4px;
+  color:rgba(30,55,100,0.85);cursor:pointer;font-size:12px;line-height:1.4;margin-bottom:4px;
   transition:all .15s;font-family:inherit;
 }
 .req-btn:hover{border-color:rgba(30,55,100,0.85);color:rgba(30,55,100,1);background:rgba(255,255,255,0.65)}
 .req-btn.active{background:rgba(30,55,100,0.85);color:#fff;border-color:rgba(30,55,100,0.85);font-weight:600}
 .reset-btn{
   display:block;width:100%;margin-top:8px;padding:7px 12px;border-radius:0;
-  border:1px solid rgba(30,55,100,0.4);
-  background:rgba(255,255,255,0.3);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  color:rgba(30,55,100,0.6);
+  border:1px solid rgba(30,55,100,0.4);background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:rgba(30,55,100,0.6);
   cursor:pointer;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
   font-family:'SF Mono',ui-monospace,monospace;transition:all .15s;
 }
 .reset-btn:hover{border-color:rgba(30,55,100,0.7);color:rgba(30,55,100,0.9);background:rgba(255,255,255,0.5)}
-.cv-section{
-  font-size:10px;font-weight:600;color:rgba(30,55,100,0.5);
-  text-transform:uppercase;letter-spacing:.1em;
-  margin:1.5rem 0 .75rem;padding-bottom:4px;
-  border-bottom:1px solid rgba(30,55,100,0.15);
-}
+.cv-section{font-size:10px;font-weight:600;color:rgba(30,55,100,0.5);text-transform:uppercase;letter-spacing:.1em;margin:1.5rem 0 .75rem;padding-bottom:4px;border-bottom:1px solid rgba(30,55,100,0.15)}
 .cv-about{font-size:13px;color:rgba(30,55,100,0.75);line-height:1.8;margin-bottom:.75rem;padding:8px;border:1px solid transparent;transition:all .2s}
 .role-title{font-size:15px;font-weight:600;color:rgba(30,55,100,0.95);margin-top:1.25rem;margin-bottom:2px}
 .role-company{font-size:12px;color:rgba(30,55,100,0.45);margin-bottom:.5rem}
 .bullet{display:flex;gap:8px;padding:7px 10px;font-size:13px;color:rgba(30,55,100,0.75);line-height:1.6;margin-bottom:4px;border:1px solid transparent;transition:all .2s}
 .bullet::before{content:'\00B7';color:rgba(30,55,100,0.25);flex-shrink:0;font-size:18px;line-height:1.3}
 .refill-line{font-size:13px;color:rgba(30,55,100,0.6);line-height:1.6;padding:7px 10px;font-style:italic;border:1px solid transparent;transition:all .2s}
-.highlight{background:rgba(30,55,100,0.08) !important;border-color:rgba(30,55,100,0.2) !important;color:rgba(30,55,100,0.95) !important}
-.highlight::before{color:rgba(30,55,100,0.6) !important}
+.highlight{background:rgba(30,55,100,0.08)!important;border-color:rgba(30,55,100,0.2)!important;color:rgba(30,55,100,0.95)!important}
+.highlight::before{color:rgba(30,55,100,0.6)!important}
 .dimmed{opacity:.2}
 .skills-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.5rem}
 .skill-tag{font-size:12px;padding:4px 12px;border-radius:0;background:transparent;color:rgba(30,55,100,0.55);border:1px solid rgba(30,55,100,0.2);transition:all .2s}
@@ -248,58 +187,52 @@ body{
 <body>
 
 <!-- ── INTRO ── -->
-<section class="intro">
-  <div class="title">Maria Armada Churruca</div>
-  <h1 class="heading">What brought us here?</h1>
-
-  <div class="timeline">
-
-    <div class="step">
-      <div class="node"><div class="dot"></div></div>
-      <div class="content">
-        <div class="step-label">2020 – 2022 &nbsp;·&nbsp; EY</div>
-        <div class="step-text"><strong>Sustainability & structural change.</strong> In-house consulting for large enterprises navigating ESG disruption — translating regulatory complexity into operational priorities and embedding transformation across business units, markets and supply chains.</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="node"><div class="dot"></div></div>
-      <div class="content">
-        <div class="step-label">2023 &nbsp;·&nbsp; BCG</div>
-        <div class="step-text"><strong>Circular economy & value engineering.</strong> Building the business case for structural transformation — new circular business models, M&A pilots, offering generation. Helping companies understand what the disruption is actually worth, and how to act on it.</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="node"><div class="dot"></div></div>
-      <div class="content">
-        <div class="step-label">2023 – 2024 &nbsp;·&nbsp; REFILL</div>
-        <div class="step-text"><strong>Real operations & supply chain.</strong> Co-founded a circular packaging venture — activating the model in practice: product definition, GTM, supply chain. From concept to operations in an adverse early-stage environment.</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="node"><div class="dot active"></div></div>
-      <div class="content">
-        <div class="step-label">2025 – Present &nbsp;·&nbsp; Dcycle</div>
-        <div class="step-text"><strong>ESG tech → data infrastructure → solution engineering.</strong> The market shifted from advisory to software. I moved with it — building the Solutions function, engineering customised integrations for enterprise clients, and automating internal workflows end-to-end with AI. That is where I met Claude Code, and where this trajectory clicks.</div>
-      </div>
-    </div>
-
-    <div class="step final">
-      <div class="node"><div class="dot active"></div></div>
-      <div class="content">
-        <div class="step-label">Next</div>
-        <div class="step-text">I want to take this to the next level — working at the frontier of AI and enterprise, where the disruption is being built, not just deployed. <strong>Is it Anthropic?</strong></div>
-      </div>
-    </div>
-
+<section class="intro" id="intro">
+  <div class="header">
+    <div class="intro-name">Maria Armada Churruca</div>
+    <h1 class="intro-title">What brought us here?</h1>
   </div>
 
-  <a class="scroll-cta" href="#cv-section">
-    <span>See the detail</span>
-    <div class="arrow"></div>
-  </a>
+  <div class="diagram" id="diagram">
+    <!-- SVG connector lines, drawn by JS after layout -->
+    <svg class="lines" id="svg-lines"></svg>
+
+    <div class="label l1" id="l1">
+      <div class="label-title">Sustainability &amp; structural change <span style="font-weight:400;opacity:.6">(EY)</span></div>
+      <div class="label-body">In-house consulting for large enterprises navigating ESG disruption — translating regulatory complexity into operational priorities and embedding transformation across business units, markets and supply chains.</div>
+    </div>
+
+    <div class="label l2" id="l2">
+      <div class="label-title">Circular economy &amp; value engineering <span style="font-weight:400;opacity:.6">(BCG)</span></div>
+      <div class="label-body">Building the business case for structural transformation — new circular business models, M&amp;A pilots, offering generation. Helping companies understand what the disruption is actually worth, and how to act on it.</div>
+    </div>
+
+    <div class="label l3" id="l3">
+      <div class="label-title">Real operations &amp; supply chain <span style="font-weight:400;opacity:.6">(Refill)</span></div>
+      <div class="label-body">Co-founded a circular packaging venture — activating the model in practice: product definition, GTM, supply chain. From concept to operations in an adverse early-stage environment.</div>
+    </div>
+
+    <div class="label l4" id="l4">
+      <div class="label-title">ESG tech → data infrastructure → solution engineering <span style="font-weight:400;opacity:.6">(Dcycle)</span></div>
+      <div class="label-body">The market shifted from advisory to software. I moved with it — building the Solutions function, engineering customised integrations for enterprise clients, and automating internal workflows end-to-end with AI. That is where I met Claude Code, and where this trajectory clicks.</div>
+    </div>
+
+    <div class="label l5" id="l5">
+      <div class="label-title">Next</div>
+      <div class="label-body">I want to take this to the next level — working at the frontier of AI and enterprise, where the disruption is being built, not just deployed. <strong style="color:rgba(30,55,100,0.95)">Is it Anthropic?</strong></div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="contact-btns">
+      <a class="contact-btn" href="mailto:mariaarmadach@gmail.com">Email me</a>
+      <a class="contact-btn primary" href="https://calendly.com/mariaarmadach/30min" target="_blank">Book 30 min →</a>
+    </div>
+    <a class="scroll-cta" href="#cv-section" onclick="document.body.classList.add('show-cv')">
+      <div class="arrow"></div>
+      <span>See the detail</span>
+    </a>
+  </div>
 </section>
 
 <!-- ── CV ── -->
@@ -307,9 +240,9 @@ body{
 <div class="page">
   <div class="cv-header">
     <div class="cv-name">Maria Armada Churruca</div>
-    <div class="contact-btns">
-      <a class="contact-btn" href="mailto:mariaarmadach@gmail.com">Email me</a>
-      <a class="contact-btn primary" href="https://calendly.com/mariaarmadach/30min" target="_blank">Book 30 min →</a>
+    <div class="contact-btns-cv">
+      <a class="cv-btn" href="mailto:mariaarmadach@gmail.com">Email me</a>
+      <a class="cv-btn primary" href="https://calendly.com/mariaarmadach/30min" target="_blank">Book 30 min →</a>
     </div>
   </div>
 
@@ -392,6 +325,48 @@ body{
 </section>
 
 <script>
+/* ── draw connector lines from each label's anchor point to a central dot ── */
+function drawLines(){
+  const diagram = document.getElementById('diagram');
+  const svg = document.getElementById('svg-lines');
+  const dRect = diagram.getBoundingClientRect();
+
+  /* central anchor point (middle of diagram) */
+  const cx = dRect.width * 0.5;
+  const cy = dRect.height * 0.48;
+
+  /* draw central dot */
+  svg.innerHTML = `<circle cx="${cx}" cy="${cy}" r="4" fill="rgba(30,55,100,0.5)"/>`;
+
+  const labels = ['l1','l2','l3','l4','l5'];
+  labels.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    const eRect = el.getBoundingClientRect();
+    const ex = eRect.left - dRect.left + eRect.width/2;
+    const ey = eRect.top  - dRect.top  + eRect.height/2;
+
+    /* cubic bezier: handle points pulled toward center */
+    const mx = (ex + cx) / 2;
+    const my = (ey + cy) / 2;
+    const path = `M ${ex} ${ey} Q ${mx} ${ey} ${cx} ${cy}`;
+
+    svg.innerHTML += `
+      <path d="${path}" fill="none" stroke="rgba(30,55,100,0.2)" stroke-width="1"/>
+      <circle cx="${ex}" cy="${ey}" r="3" fill="none" stroke="rgba(30,55,100,0.4)" stroke-width="1"/>
+    `;
+  });
+}
+
+window.addEventListener('load', drawLines);
+window.addEventListener('resize', drawLines);
+
+/* scroll to cv unlocks scroll */
+document.querySelector('.scroll-cta').addEventListener('click', ()=>{
+  document.body.classList.add('show-cv');
+});
+
+/* cv filter */
 let active=null;
 function filter(req){
   if(active===req){reset();return;}
@@ -411,4 +386,3 @@ function reset(){
 </script>
 </body>
 </html>
-
