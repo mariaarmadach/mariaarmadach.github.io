@@ -16,19 +16,18 @@ body{
 .intro{height:100vh;position:relative;overflow:hidden}
 
 .topbar{
-  position:absolute;top:2rem;left:2.5rem;right:2.5rem;
-  display:flex;justify-content:space-between;align-items:center;
+  position:absolute;top:2rem;left:2.5rem;
   z-index:10;
 }
 .intro-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(30,55,100,0.85)}
 
-/* SVG behind labels */
-.path-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+/* SVG */
+.path-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
 
 /* Label boxes */
 .label{
   position:absolute;
-  width:36%;
+  width:26%;
   background:rgba(255,255,255,0.5);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid rgba(30,55,100,0.25);
@@ -39,36 +38,16 @@ body{
 .label-company{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(30,55,100,0.4);margin-bottom:5px}
 .label-body{font-size:10.5px;color:rgba(30,55,100,0.6);line-height:1.6}
 
-/* Row 1 */
-#l-ey    {top:18%;left:4%}
-#l-bcg   {top:18%;right:4%}
-/* Row 2 */
-#l-refill{top:50%;left:4%}
-#l-dcycle{top:50%;right:4%}
-/* Row 3 — Next, narrower, center */
-#l-next{
-  bottom:10%;left:50%;transform:translateX(-50%);
-  width:280px;text-align:center;
-}
+/* Positions — matching sketch (centered, not at edges) */
+#l-ey    {top:18%; left:8%}
+#l-bcg   {top:20%; left:54%}
+#l-refill{top:52%; left:8%}
+#l-dcycle{top:50%; left:48%}
+#l-next  {bottom:16%;left:36%;width:22%;text-align:center}
 #l-next .label-title{font-size:13px;font-style:italic}
 #l-next .label-body{font-size:11px;font-style:italic;color:rgba(30,55,100,0.65)}
 
-/* bottom bar */
-.bottom-left{position:absolute;bottom:2rem;left:2.5rem;display:flex;gap:.5rem;z-index:10}
-.contact-btn{
-  padding:8px 14px;font-size:11px;font-weight:600;
-  font-family:'SF Mono',ui-monospace,monospace;
-  letter-spacing:.06em;text-transform:uppercase;
-  border:1px solid rgba(30,55,100,0.45);
-  background:rgba(255,255,255,0.4);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  color:rgba(30,55,100,0.8);text-decoration:none;
-  display:inline-block;transition:all .15s;border-radius:0;
-}
-.contact-btn:hover{background:rgba(255,255,255,0.65);color:rgba(30,55,100,1)}
-.contact-btn.primary{background:rgba(30,55,100,0.85);color:#fff;border-color:rgba(30,55,100,0.85)}
-.contact-btn.primary:hover{background:rgba(30,55,100,1)}
-
+/* see the detail — bottom right */
 .scroll-cta{
   position:absolute;bottom:2rem;right:2.5rem;z-index:10;
   display:flex;flex-direction:column;align-items:center;gap:6px;
@@ -76,12 +55,12 @@ body{
   text-decoration:none;transition:color .2s;
 }
 .scroll-cta:hover{color:rgba(30,55,100,1)}
-.arrow-line{width:1px;height:28px;background:rgba(30,55,100,0.35);position:relative;animation:pulse 2s ease-in-out infinite}
+.arrow-line{width:1px;height:24px;background:rgba(30,55,100,0.4);position:relative;animation:pulse 2s ease-in-out infinite}
 .arrow-line::after{
   content:'';position:absolute;bottom:-4px;left:-3px;
-  width:7px;height:7px;
-  border-right:1px solid rgba(30,55,100,0.55);
-  border-bottom:1px solid rgba(30,55,100,0.55);
+  width:6px;height:6px;
+  border-right:1px solid rgba(30,55,100,0.6);
+  border-bottom:1px solid rgba(30,55,100,0.6);
   transform:rotate(45deg);
 }
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
@@ -89,8 +68,19 @@ body{
 /* ── CV ── */
 #cv-section{border-top:1px solid rgba(30,55,100,0.08)}
 .page{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
-.cv-header{padding:2rem 0 1.5rem;border-bottom:1px solid rgba(30,55,100,0.2);margin-bottom:2rem}
+.cv-header{padding:2rem 0 1.5rem;border-bottom:1px solid rgba(30,55,100,0.2);margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .cv-name{font-size:24px;font-weight:600;color:rgba(30,55,100,0.95)}
+.cv-btns{display:flex;gap:.5rem}
+.cv-btn{
+  padding:8px 14px;font-size:11px;font-weight:600;
+  font-family:'SF Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid rgba(30,55,100,0.45);background:rgba(255,255,255,0.45);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  color:rgba(30,55,100,0.8);text-decoration:none;display:inline-block;transition:all .15s;border-radius:0;
+}
+.cv-btn:hover{background:rgba(255,255,255,0.65);color:rgba(30,55,100,1)}
+.cv-btn.primary{background:rgba(30,55,100,0.85);color:#fff;border-color:rgba(30,55,100,0.85)}
+.cv-btn.primary:hover{background:rgba(30,55,100,1)}
 .layout{display:grid;grid-template-columns:240px 1fr;gap:2rem}
 .left-panel{position:sticky;top:2rem;align-self:start}
 .panel-title{font-size:10px;font-weight:600;color:rgba(30,55,100,0.75);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
@@ -133,10 +123,8 @@ body{
 </head>
 <body>
 
-<section class="intro" id="intro">
-  <div class="topbar">
-    <div class="intro-name">Maria Armada Churruca</div>
-  </div>
+<section class="intro">
+  <div class="topbar"><div class="intro-name">Maria Armada Churruca</div></div>
 
   <svg class="path-svg" id="path-svg"></svg>
 
@@ -166,7 +154,7 @@ body{
 
   <div class="label" id="l-next">
     <div class="label-title">Next</div>
-    <div class="label-body">I want to take this to the next level — working at the frontier of AI and enterprise, where the disruption is being built, not just deployed. <strong style="color:rgba(30,55,100,0.95)">Is it Anthropic?</strong></div>
+    <div class="label-body">Working at the frontier of AI and enterprise, where the disruption is being built, not just deployed. <strong style="color:rgba(30,55,100,0.95)">Is it Anthropic?</strong></div>
   </div>
 
   <a class="scroll-cta" href="#cv-section">
@@ -178,11 +166,11 @@ body{
 <!-- ── CV ── -->
 <section id="cv-section">
 <div class="page">
-  <div class="cv-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+  <div class="cv-header">
     <div class="cv-name">Maria Armada Churruca</div>
-    <div style="display:flex;gap:.5rem">
-      <a class="contact-btn" href="mailto:mariaarmadach@gmail.com">Email me</a>
-      <a class="contact-btn primary" href="https://calendly.com/mariaarmadach/30min" target="_blank">Book 30 min →</a>
+    <div class="cv-btns">
+      <a class="cv-btn" href="mailto:mariaarmadach@gmail.com">Email me</a>
+      <a class="cv-btn primary" href="https://calendly.com/mariaarmadach/30min" target="_blank">Book 30 min →</a>
     </div>
   </div>
   <div class="layout">
@@ -206,7 +194,7 @@ body{
       <div class="cv-section">Experience</div>
       <div class="role-title">Strategic Solutions Engineer</div>
       <div class="role-company">Dcycle</div>
-      <div class="bullet" data-tags="enterprise translate exec fast">Built the Solutions department from scratch: designed a value engineering methodology translating complex AI and regulatory requirements into enterprise business cases — raising team conversion from 35% to 60% and average ticket from €11k to €14k in a 3-month pilot (Oct–Dec 2024).</div>
+      <div class="bullet" data-tags="enterprise translate exec fast">Built the Solutions department from scratch: designed a value engineering methodology translating complex AI and regulatory requirements into enterprise business cases — raising team conversion from 35% to 60% and average ticket from €11k to €14k in a 3-month pilot.</div>
       <div class="bullet" data-tags="ai technical">Developed customised client solutions within the product using Claude Code — adapting core functionality to specific enterprise operational needs and building personalised integrations that extended the product's capabilities beyond its standard offering.</div>
       <div class="bullet" data-tags="stakeholder fast">Verticalised team by industry and built a knowledge programme for commercial autonomy, turning individual methodology into a scalable and replicable model.</div>
       <div class="bullet" data-tags="ai technical eval">Automated proposal generation and internal reporting through full system integration (CRM, pricing platforms, client history) with AI, saving 70 hours per month and eliminating ~100 hours of annual manual work.</div>
@@ -254,91 +242,94 @@ body{
 </section>
 
 <script>
-function box(id){
+function b(id){
   const el=document.getElementById(id);
   const r=el.getBoundingClientRect();
-  return {
-    left:r.left, right:r.right,
-    top:r.top, bottom:r.bottom,
-    cx:r.left+r.width/2, cy:r.top+r.height/2,
-    w:r.width, h:r.height
-  };
+  return {l:r.left,r:r.right,t:r.top,b:r.bottom,cx:r.left+r.width/2,cy:r.top+r.height/2};
+}
+
+function dots(x1,y1,x2,y2,n){
+  let s='';
+  for(let i=1;i<n;i++){
+    const t=i/n;
+    const x=x1+(x2-x1)*t, y=y1+(y2-y1)*t;
+    s+=`<circle cx="${x}" cy="${y}" r="2" fill="rgba(30,55,100,0.35)"/>`;
+  }
+  return s;
 }
 
 function drawPath(){
-  const svg = document.getElementById('path-svg');
-  const ey=box('l-ey'), bcg=box('l-bcg'), ref=box('l-refill'), dc=box('l-dcycle'), nx=box('l-next');
-  const R = 28; // curve radius
-  const stroke = "rgba(30,55,100,0.3)";
-  const sw = 1.2;
-
-  /* Gap between box edge and line start/end */
-  const G = 0;
+  const svg=document.getElementById('path-svg');
+  const W=window.innerWidth, H=window.innerHeight;
+  const ey=b('l-ey'), bcg=b('l-bcg'), ref=b('l-refill'), dc=b('l-dcycle'), nx=b('l-next');
+  const st='rgba(30,55,100,0.28)', sw=1.2, R=52;
 
   /* Segment 1: EY right → BCG left (horizontal, row 1) */
-  const s1x1=ey.right+G, s1y=ey.cy;
-  const s1x2=bcg.left-G, s1y2=bcg.cy;
+  const s1x1=ey.r, s1y1=ey.cy, s1x2=bcg.l, s1y2=bcg.cy;
 
-  /* Curve right: BCG right → down → Dcycle right (around right side) */
-  const cRx = bcg.right + 36;
-  const cRy1 = bcg.cy;
-  const cRy2 = dc.cy;
+  /* Right curve: BCG right → big rounded U → Dcycle right */
+  const rx=Math.max(bcg.r, dc.r)+R*1.6;
+  const ry1=bcg.cy, ry2=dc.cy;
 
-  /* Segment 2: Dcycle left → Refill right (horizontal, row 2, going left) */
-  const s2x1=dc.left-G, s2y=dc.cy;
-  const s2x2=ref.right+G, s2y2=ref.cy;
+  /* Segment 2: Dcycle left → Refill right (horizontal, row 2) */
+  const s2x1=dc.l, s2y1=dc.cy, s2x2=ref.r, s2y2=ref.cy;
 
-  /* Curve left: Refill left → down → Next top-left (around left side) */
-  const cLx = ref.left - 36;
-  const cLy1 = ref.cy;
-  const cLy2 = nx.top - 10;
-  const cLx2 = nx.cx;
+  /* Left curve: Refill left → big rounded U → Next */
+  const lx=Math.min(ref.l, nx.l)-R*1.6;
+  const ly1=ref.cy, ly2=nx.cy;
+  const nxEntry=nx.l;
 
   /* Trailing dots after Next */
-  const dotStartX = nx.right + G + 10;
-  const dotY = nx.cy;
+  const trailX=nx.r+10, trailY=nx.cy;
 
-  let out = '';
+  let o='';
 
-  /* Seg 1 */
-  out += `<line x1="${s1x1}" y1="${s1y}" x2="${s1x2}" y2="${s1y2}" stroke="${stroke}" stroke-width="${sw}"/>`;
+  /* ── Seg 1 line + dots ── */
+  o+=`<line x1="${s1x1}" y1="${s1y1}" x2="${s1x2}" y2="${s1y2}" stroke="${st}" stroke-width="${sw}"/>`;
+  o+=dots(s1x1,s1y1,s1x2,s1y2,8);
 
-  /* Curve right side: BCG right → arc down → Dcycle right */
-  out += `<path d="
-    M ${bcg.right+G} ${cRy1}
-    L ${cRx - R} ${cRy1}
-    Q ${cRx} ${cRy1} ${cRx} ${cRy1+R}
-    L ${cRx} ${cRy2-R}
-    Q ${cRx} ${cRy2} ${cRx-R} ${cRy2}
-    L ${s2x1} ${s2x1 < cRx ? s2y : cRy2}
-  " fill="none" stroke="${stroke}" stroke-width="${sw}"/>`;
+  /* ── Right curve ── */
+  o+=`<path d="
+    M ${bcg.r} ${ry1}
+    H ${rx-R}
+    Q ${rx} ${ry1} ${rx} ${ry1+R}
+    V ${ry2-R}
+    Q ${rx} ${ry2} ${rx-R} ${ry2}
+    H ${dc.r}
+  " fill="none" stroke="${st}" stroke-width="${sw}"/>`;
 
-  /* Seg 2 Dcycle→Refill */
-  out += `<line x1="${s2x1}" y1="${s2y}" x2="${s2x2}" y2="${s2y2}" stroke="${stroke}" stroke-width="${sw}"/>`;
+  /* ── Seg 2 line + dots (right to left) ── */
+  o+=`<line x1="${s2x1}" y1="${s2y1}" x2="${s2x2}" y2="${s2y2}" stroke="${st}" stroke-width="${sw}"/>`;
+  o+=dots(s2x1,s2y1,s2x2,s2y2,8);
 
-  /* Curve left side: Refill left → arc down → Next */
-  out += `<path d="
-    M ${ref.left-G} ${cLy1}
-    L ${cLx+R} ${cLy1}
-    Q ${cLx} ${cLy1} ${cLx} ${cLy1+R}
-    L ${cLx} ${cLy2}
-    Q ${cLx} ${cLy2+R} ${cLx+R} ${cLy2+R}
-    L ${nx.cx} ${nx.top-G}
-  " fill="none" stroke="${stroke}" stroke-width="${sw}"/>`;
+  /* ── Left curve ── */
+  o+=`<path d="
+    M ${ref.l} ${ly1}
+    H ${lx+R}
+    Q ${lx} ${ly1} ${lx} ${ly1+R}
+    V ${ly2-R}
+    Q ${lx} ${ly2} ${lx+R} ${ly2}
+    H ${nxEntry}
+  " fill="none" stroke="${st}" stroke-width="${sw}"/>`;
 
-  /* Trailing dots */
+  /* ── Trailing dots ── */
   for(let i=0;i<5;i++){
-    const op = 0.35 - i*0.06;
-    out += `<circle cx="${dotStartX + i*14}" cy="${dotY}" r="${1.8-i*0.2}" fill="rgba(30,55,100,${Math.max(op,0.05)})"/>`;
+    const op=Math.max(0.3-i*0.06,0.04);
+    o+=`<circle cx="${trailX+i*16}" cy="${trailY}" r="${2-i*0.2}" fill="rgba(30,55,100,${op})"/>`;
   }
 
-  svg.innerHTML = out;
+  /* Junction dots at box edges */
+  [[s1x1,s1y1],[s1x2,s1y2],[bcg.r,ry1],[dc.r,ry2],[s2x1,s2y1],[s2x2,s2y2],[ref.l,ly1],[nxEntry,ly2]].forEach(([x,y])=>{
+    o+=`<circle cx="${x}" cy="${y}" r="3" fill="none" stroke="rgba(30,55,100,0.45)" stroke-width="1"/>
+        <circle cx="${x}" cy="${y}" r="1.5" fill="rgba(30,55,100,0.45)"/>`;
+  });
+
+  svg.innerHTML=o;
 }
 
-window.addEventListener('load', drawPath);
-window.addEventListener('resize', drawPath);
+window.addEventListener('load',drawPath);
+window.addEventListener('resize',drawPath);
 
-/* CV filter */
 let active=null;
 function filter(req){
   if(active===req){reset();return;}
